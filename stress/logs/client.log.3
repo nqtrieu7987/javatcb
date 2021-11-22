@@ -1,0 +1,709 @@
+2019-10-28 11:02:12,265 [http-nio-8020-exec-4] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved exception caused by handler execution: org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/xml;charset=UTF-8' not supported
+2019-10-28 11:02:12,267 [http-nio-8020-exec-4] WARN  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Failed to invoke @ExceptionHandler method: public final org.springframework.http.ResponseEntity<java.lang.Object> com.howtodoinjava.rest.exception.CustomExceptionHandler.handleAllExceptions(java.lang.Exception,org.springframework.web.context.request.WebRequest)
+org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:288)
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:224)
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:82)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:119)
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:404)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:61)
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:136)
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:78)
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1255)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1062)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1008)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:728)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:472)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:395)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:316)
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:395)
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:254)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:177)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:806)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1498)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-10-28 11:02:12,270 [http-nio-8020-exec-4] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved exception caused by handler execution: org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation
+2019-10-28 11:02:12,997 [http-nio-8020-exec-5] WARN  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Failed to invoke @ExceptionHandler method: public final org.springframework.http.ResponseEntity<java.lang.Object> com.howtodoinjava.rest.exception.CustomExceptionHandler.handleAllExceptions(java.lang.Exception,org.springframework.web.context.request.WebRequest)
+org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:288)
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:224)
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:82)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:119)
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:404)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:61)
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:136)
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:78)
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1255)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1062)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1008)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:806)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1498)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-10-28 11:02:12,999 [http-nio-8020-exec-5] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved exception caused by handler execution: org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/xml;charset=UTF-8' not supported
+2019-10-28 11:02:13,005 [http-nio-8020-exec-5] WARN  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Failed to invoke @ExceptionHandler method: public final org.springframework.http.ResponseEntity<java.lang.Object> com.howtodoinjava.rest.exception.CustomExceptionHandler.handleAllExceptions(java.lang.Exception,org.springframework.web.context.request.WebRequest)
+org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:288)
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:224)
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:82)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:119)
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:404)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:61)
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:136)
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:78)
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1255)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1062)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1008)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:728)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:472)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:395)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:316)
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:395)
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:254)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:177)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:806)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1498)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-10-28 11:02:13,010 [http-nio-8020-exec-5] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved exception caused by handler execution: org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation
+2019-10-28 11:03:34,177 [main] ERROR com.vnm.erp - Get Config file fail with key : DBURLOSSDB
+2019-10-28 11:03:34,178 [main] ERROR com.vnm.erp - Get Config file fail with key : DBPASSOSSDB
+2019-10-28 11:03:34,178 [main] ERROR com.vnm.erp - Get Config file fail with key : DBUSEROSSDB
+2019-10-28 11:03:34,178 [main] INFO  com.vnm.erp - listener_port = 8017
+2019-10-28 11:03:34,178 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_type
+2019-10-28 11:03:34,178 [main] INFO  com.vnm.erp - OTP_TYPE = 0
+2019-10-28 11:03:34,178 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_length
+2019-10-28 11:03:34,178 [main] INFO  com.vnm.erp - OTP_LENGTH = 0
+2019-10-28 11:03:34,178 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_live_time
+2019-10-28 11:03:34,178 [main] INFO  com.vnm.erp - OTP_LIVE_TIME = 0
+2019-10-28 11:03:34,446 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBURLOSSDB
+2019-10-28 11:03:34,447 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBPASSOSSDB
+2019-10-28 11:03:34,447 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBUSEROSSDB
+2019-10-28 11:03:34,448 [restartedMain] INFO  com.vnm.erp - listener_port = 8017
+2019-10-28 11:03:34,448 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_type
+2019-10-28 11:03:34,448 [restartedMain] INFO  com.vnm.erp - OTP_TYPE = 0
+2019-10-28 11:03:34,448 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_length
+2019-10-28 11:03:34,448 [restartedMain] INFO  com.vnm.erp - OTP_LENGTH = 0
+2019-10-28 11:03:34,449 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_live_time
+2019-10-28 11:03:34,449 [restartedMain] INFO  com.vnm.erp - OTP_LIVE_TIME = 0
+2019-10-28 11:03:34,947 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - Starting SpringBootDemoApplication on lit11 with PID 50056 (C:\Users\trieu_nq\workspace\CRM\target\classes started by trieu_nq in C:\Users\trieu_nq\workspace\CRM)
+2019-10-28 11:03:34,954 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - No active profile set, falling back to default profiles: default
+2019-10-28 11:03:35,030 [restartedMain] INFO  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@5df8ff47: startup date [Mon Oct 28 11:03:35 ICT 2019]; root of context hierarchy
+2019-10-28 11:03:37,100 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8020 (http)
+2019-10-28 11:03:37,386 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2357 ms
+2019-10-28 11:03:37,478 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+2019-10-28 11:03:37,483 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-10-28 11:03:37,483 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-10-28 11:03:37,483 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-10-28 11:03:37,483 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2019-10-28 11:03:38,109 [restartedMain] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService  'threadPoolTaskExecutor'
+2019-10-28 11:03:38,209 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:03:38,291 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@5df8ff47: startup date [Mon Oct 28 11:03:35 ICT 2019]; root of context hierarchy
+2019-10-28 11:03:38,394 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu],methods=[GET],produces=[application/json]}" onto public com.howtodoinjava.rest.model.Employees com.howtodoinjava.rest.controller.EmployeeController.getEmployees1()
+2019-10-28 11:03:38,396 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu/],methods=[POST],consumes=[application/json],produces=[application/json]}" onto public org.springframework.http.ResponseEntity<java.lang.Object> com.howtodoinjava.rest.controller.EmployeeController.addEmployee(java.lang.String,java.lang.String,com.howtodoinjava.rest.model.Employee) throws java.lang.Exception
+2019-10-28 11:03:38,396 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu/start.swe],methods=[POST],consumes=[application/xml],produces=[application/xml]}" onto public java.lang.String com.howtodoinjava.rest.controller.EmployeeController.getEmployees(org.springframework.http.HttpEntity<java.lang.String>,java.util.Map<java.lang.String, java.lang.String>)
+2019-10-28 11:03:38,399 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-10-28 11:03:38,399 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-10-28 11:03:38,429 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:03:38,430 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:03:38,451 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Detected @ExceptionHandler methods in customExceptionHandler
+2019-10-28 11:03:38,716 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2019-10-28 11:03:38,747 [restartedMain] INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2019-10-28 11:03:38,786 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8020 (http) with context path ''
+2019-10-28 11:03:38,794 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - Started SpringBootDemoApplication in 4.339 seconds (JVM running for 5.31)
+2019-10-28 11:03:45,941 [http-nio-8020-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+2019-10-28 11:03:45,982 [http-nio-8020-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 41 ms
+2019-10-28 11:03:46,061 [http-nio-8020-exec-1] WARN  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Failed to invoke @ExceptionHandler method: public final org.springframework.http.ResponseEntity<java.lang.Object> com.howtodoinjava.rest.exception.CustomExceptionHandler.handleAllExceptions(java.lang.Exception,org.springframework.web.context.request.WebRequest)
+org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:288)
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:224)
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:82)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:119)
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:404)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:61)
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:136)
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:78)
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1255)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1062)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1008)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:806)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1498)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-10-28 11:03:46,065 [http-nio-8020-exec-1] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved exception caused by handler execution: org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/xml;charset=UTF-8' not supported
+2019-10-28 11:03:46,084 [http-nio-8020-exec-1] WARN  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Failed to invoke @ExceptionHandler method: public final org.springframework.http.ResponseEntity<java.lang.Object> com.howtodoinjava.rest.exception.CustomExceptionHandler.handleAllExceptions(java.lang.Exception,org.springframework.web.context.request.WebRequest)
+org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:288)
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:224)
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:82)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:119)
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:404)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:61)
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:136)
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:78)
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1255)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1062)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1008)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:728)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:472)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:395)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:316)
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:395)
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:254)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:177)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:806)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1498)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-10-28 11:03:46,085 [http-nio-8020-exec-1] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved exception caused by handler execution: org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation
+2019-10-28 11:04:57,567 [http-nio-8020-exec-5] WARN  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Resolved exception caused by handler execution: org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/json' not supported
+2019-10-28 11:05:13,531 [main] ERROR com.vnm.erp - Get Config file fail with key : DBURLOSSDB
+2019-10-28 11:05:13,532 [main] ERROR com.vnm.erp - Get Config file fail with key : DBPASSOSSDB
+2019-10-28 11:05:13,532 [main] ERROR com.vnm.erp - Get Config file fail with key : DBUSEROSSDB
+2019-10-28 11:05:13,532 [main] INFO  com.vnm.erp - listener_port = 8017
+2019-10-28 11:05:13,532 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_type
+2019-10-28 11:05:13,532 [main] INFO  com.vnm.erp - OTP_TYPE = 0
+2019-10-28 11:05:13,533 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_length
+2019-10-28 11:05:13,533 [main] INFO  com.vnm.erp - OTP_LENGTH = 0
+2019-10-28 11:05:13,533 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_live_time
+2019-10-28 11:05:13,533 [main] INFO  com.vnm.erp - OTP_LIVE_TIME = 0
+2019-10-28 11:05:13,795 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBURLOSSDB
+2019-10-28 11:05:13,795 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBPASSOSSDB
+2019-10-28 11:05:13,795 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBUSEROSSDB
+2019-10-28 11:05:13,796 [restartedMain] INFO  com.vnm.erp - listener_port = 8017
+2019-10-28 11:05:13,796 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_type
+2019-10-28 11:05:13,796 [restartedMain] INFO  com.vnm.erp - OTP_TYPE = 0
+2019-10-28 11:05:13,796 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_length
+2019-10-28 11:05:13,796 [restartedMain] INFO  com.vnm.erp - OTP_LENGTH = 0
+2019-10-28 11:05:13,796 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_live_time
+2019-10-28 11:05:13,796 [restartedMain] INFO  com.vnm.erp - OTP_LIVE_TIME = 0
+2019-10-28 11:05:14,303 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - Starting SpringBootDemoApplication on lit11 with PID 47176 (C:\Users\trieu_nq\workspace\CRM\target\classes started by trieu_nq in C:\Users\trieu_nq\workspace\CRM)
+2019-10-28 11:05:14,304 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - No active profile set, falling back to default profiles: default
+2019-10-28 11:05:14,377 [restartedMain] INFO  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@f2ce01: startup date [Mon Oct 28 11:05:14 ICT 2019]; root of context hierarchy
+2019-10-28 11:05:16,313 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8020 (http)
+2019-10-28 11:05:16,569 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2192 ms
+2019-10-28 11:05:16,639 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+2019-10-28 11:05:16,643 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-10-28 11:05:16,643 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-10-28 11:05:16,643 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-10-28 11:05:16,643 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2019-10-28 11:05:17,255 [restartedMain] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService  'threadPoolTaskExecutor'
+2019-10-28 11:05:17,353 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:05:17,421 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@f2ce01: startup date [Mon Oct 28 11:05:14 ICT 2019]; root of context hierarchy
+2019-10-28 11:05:17,535 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu/start.swe],methods=[POST],consumes=[*/*],produces=[*/*]}" onto public java.lang.String com.howtodoinjava.rest.controller.EmployeeController.getEmployees(org.springframework.http.HttpEntity<java.lang.String>,java.util.Map<java.lang.String, java.lang.String>)
+2019-10-28 11:05:17,536 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu],methods=[GET],produces=[application/json]}" onto public com.howtodoinjava.rest.model.Employees com.howtodoinjava.rest.controller.EmployeeController.getEmployees1()
+2019-10-28 11:05:17,536 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu/],methods=[POST],consumes=[application/json],produces=[application/json]}" onto public org.springframework.http.ResponseEntity<java.lang.Object> com.howtodoinjava.rest.controller.EmployeeController.addEmployee(java.lang.String,java.lang.String,com.howtodoinjava.rest.model.Employee) throws java.lang.Exception
+2019-10-28 11:05:17,539 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-10-28 11:05:17,540 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-10-28 11:05:17,580 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:05:17,581 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:05:17,598 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Detected @ExceptionHandler methods in customExceptionHandler
+2019-10-28 11:05:17,898 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2019-10-28 11:05:17,934 [restartedMain] INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2019-10-28 11:05:17,980 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8020 (http) with context path ''
+2019-10-28 11:05:17,986 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - Started SpringBootDemoApplication in 4.18 seconds (JVM running for 5.144)
+2019-10-28 11:05:24,008 [http-nio-8020-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+2019-10-28 11:05:24,041 [http-nio-8020-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 33 ms
+2019-10-28 11:05:24,223 [http-nio-8020-exec-2] WARN  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Failed to invoke @ExceptionHandler method: public final org.springframework.http.ResponseEntity<java.lang.Object> com.howtodoinjava.rest.exception.CustomExceptionHandler.handleAllExceptions(java.lang.Exception,org.springframework.web.context.request.WebRequest)
+org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:288)
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:224)
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:82)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:119)
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:400)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:61)
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:136)
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:78)
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1255)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1062)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1008)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:806)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1498)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-10-28 11:05:24,225 [http-nio-8020-exec-2] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved exception caused by handler execution: org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character ('<' (code 60)): expected a valid value (number, String, array, object, 'true', 'false' or 'null'); nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character ('<' (code 60)): expected a valid value (number, String, array, object, 'true', 'false' or 'null')
+ at [Source: (PushbackInputStream); line: 1, column: 2]
+2019-10-28 11:05:24,239 [http-nio-8020-exec-2] WARN  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Failed to invoke @ExceptionHandler method: public final org.springframework.http.ResponseEntity<java.lang.Object> com.howtodoinjava.rest.exception.CustomExceptionHandler.handleAllExceptions(java.lang.Exception,org.springframework.web.context.request.WebRequest)
+org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:288)
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:224)
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:82)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:119)
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:404)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:61)
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:136)
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:78)
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1255)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1062)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1008)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:728)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:472)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:395)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:316)
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:395)
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:254)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:177)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:806)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1498)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-10-28 11:05:24,239 [http-nio-8020-exec-2] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved exception caused by handler execution: org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation
+2019-10-28 11:09:05,102 [main] ERROR com.vnm.erp - Get Config file fail with key : DBURLOSSDB
+2019-10-28 11:09:05,102 [main] ERROR com.vnm.erp - Get Config file fail with key : DBPASSOSSDB
+2019-10-28 11:09:05,102 [main] ERROR com.vnm.erp - Get Config file fail with key : DBUSEROSSDB
+2019-10-28 11:09:05,102 [main] INFO  com.vnm.erp - listener_port = 8017
+2019-10-28 11:09:05,103 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_type
+2019-10-28 11:09:05,103 [main] INFO  com.vnm.erp - OTP_TYPE = 0
+2019-10-28 11:09:05,103 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_length
+2019-10-28 11:09:05,103 [main] INFO  com.vnm.erp - OTP_LENGTH = 0
+2019-10-28 11:09:05,103 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_live_time
+2019-10-28 11:09:05,103 [main] INFO  com.vnm.erp - OTP_LIVE_TIME = 0
+2019-10-28 11:09:05,187 [Thread-6] INFO  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@f2ce01: startup date [Mon Oct 28 11:05:14 ICT 2019]; root of context hierarchy
+2019-10-28 11:09:05,193 [Thread-6] INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2019-10-28 11:09:05,194 [Thread-6] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'threadPoolTaskExecutor'
+2019-10-28 11:09:05,595 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBURLOSSDB
+2019-10-28 11:09:05,595 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBPASSOSSDB
+2019-10-28 11:09:05,595 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBUSEROSSDB
+2019-10-28 11:09:05,595 [restartedMain] INFO  com.vnm.erp - listener_port = 8017
+2019-10-28 11:09:05,596 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_type
+2019-10-28 11:09:05,596 [restartedMain] INFO  com.vnm.erp - OTP_TYPE = 0
+2019-10-28 11:09:05,596 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_length
+2019-10-28 11:09:05,596 [restartedMain] INFO  com.vnm.erp - OTP_LENGTH = 0
+2019-10-28 11:09:05,596 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_live_time
+2019-10-28 11:09:05,596 [restartedMain] INFO  com.vnm.erp - OTP_LIVE_TIME = 0
+2019-10-28 11:09:05,637 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - Starting SpringBootDemoApplication on lit11 with PID 47176 (C:\Users\trieu_nq\workspace\CRM\target\classes started by trieu_nq in C:\Users\trieu_nq\workspace\CRM)
+2019-10-28 11:09:05,638 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - No active profile set, falling back to default profiles: default
+2019-10-28 11:09:05,643 [restartedMain] INFO  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@5594612a: startup date [Mon Oct 28 11:09:05 ICT 2019]; root of context hierarchy
+2019-10-28 11:09:06,367 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8020 (http)
+2019-10-28 11:09:06,520 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 877 ms
+2019-10-28 11:09:06,534 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+2019-10-28 11:09:06,535 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-10-28 11:09:06,536 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-10-28 11:09:06,536 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-10-28 11:09:06,537 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2019-10-28 11:09:06,605 [restartedMain] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService  'threadPoolTaskExecutor'
+2019-10-28 11:09:06,626 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:09:06,643 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@5594612a: startup date [Mon Oct 28 11:09:05 ICT 2019]; root of context hierarchy
+2019-10-28 11:09:06,652 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu/start.swe],methods=[POST]}" onto public java.lang.String com.howtodoinjava.rest.controller.EmployeeController.getEmployees(org.springframework.http.HttpEntity<java.lang.String>,java.util.Map<java.lang.String, java.lang.String>)
+2019-10-28 11:09:06,653 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu],methods=[GET],produces=[application/json]}" onto public com.howtodoinjava.rest.model.Employees com.howtodoinjava.rest.controller.EmployeeController.getEmployees1()
+2019-10-28 11:09:06,654 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu/],methods=[POST],consumes=[application/json],produces=[application/json]}" onto public org.springframework.http.ResponseEntity<java.lang.Object> com.howtodoinjava.rest.controller.EmployeeController.addEmployee(java.lang.String,java.lang.String,com.howtodoinjava.rest.model.Employee) throws java.lang.Exception
+2019-10-28 11:09:06,658 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-10-28 11:09:06,660 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-10-28 11:09:06,669 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:09:06,670 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:09:06,679 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Detected @ExceptionHandler methods in customExceptionHandler
+2019-10-28 11:09:06,766 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2019-10-28 11:09:06,789 [restartedMain] INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2019-10-28 11:09:09,691 [main] ERROR com.vnm.erp - Get Config file fail with key : DBURLOSSDB
+2019-10-28 11:09:09,692 [main] ERROR com.vnm.erp - Get Config file fail with key : DBPASSOSSDB
+2019-10-28 11:09:09,692 [main] ERROR com.vnm.erp - Get Config file fail with key : DBUSEROSSDB
+2019-10-28 11:09:09,692 [main] INFO  com.vnm.erp - listener_port = 8017
+2019-10-28 11:09:09,692 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_type
+2019-10-28 11:09:09,692 [main] INFO  com.vnm.erp - OTP_TYPE = 0
+2019-10-28 11:09:09,692 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_length
+2019-10-28 11:09:09,692 [main] INFO  com.vnm.erp - OTP_LENGTH = 0
+2019-10-28 11:09:09,692 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_live_time
+2019-10-28 11:09:09,692 [main] INFO  com.vnm.erp - OTP_LIVE_TIME = 0
+2019-10-28 11:09:09,954 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBURLOSSDB
+2019-10-28 11:09:09,954 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBPASSOSSDB
+2019-10-28 11:09:09,955 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBUSEROSSDB
+2019-10-28 11:09:09,955 [restartedMain] INFO  com.vnm.erp - listener_port = 8017
+2019-10-28 11:09:09,955 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_type
+2019-10-28 11:09:09,955 [restartedMain] INFO  com.vnm.erp - OTP_TYPE = 0
+2019-10-28 11:09:09,956 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_length
+2019-10-28 11:09:09,957 [restartedMain] INFO  com.vnm.erp - OTP_LENGTH = 0
+2019-10-28 11:09:09,957 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_live_time
+2019-10-28 11:09:09,957 [restartedMain] INFO  com.vnm.erp - OTP_LIVE_TIME = 0
+2019-10-28 11:09:10,464 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - Starting SpringBootDemoApplication on lit11 with PID 46428 (C:\Users\trieu_nq\workspace\CRM\target\classes started by trieu_nq in C:\Users\trieu_nq\workspace\CRM)
+2019-10-28 11:09:10,466 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - No active profile set, falling back to default profiles: default
+2019-10-28 11:09:10,533 [restartedMain] INFO  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@7064a880: startup date [Mon Oct 28 11:09:10 ICT 2019]; root of context hierarchy
+2019-10-28 11:09:12,603 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8020 (http)
+2019-10-28 11:09:12,873 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2340 ms
+2019-10-28 11:09:12,967 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+2019-10-28 11:09:12,973 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-10-28 11:09:12,974 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-10-28 11:09:12,974 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-10-28 11:09:12,974 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2019-10-28 11:09:13,629 [restartedMain] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService  'threadPoolTaskExecutor'
+2019-10-28 11:09:13,730 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:09:13,818 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@7064a880: startup date [Mon Oct 28 11:09:10 ICT 2019]; root of context hierarchy
+2019-10-28 11:09:13,918 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu],methods=[GET],produces=[application/json]}" onto public com.howtodoinjava.rest.model.Employees com.howtodoinjava.rest.controller.EmployeeController.getEmployees1()
+2019-10-28 11:09:13,920 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu/start.swe],methods=[POST]}" onto public java.lang.String com.howtodoinjava.rest.controller.EmployeeController.getEmployees(org.springframework.http.HttpEntity<java.lang.String>,java.util.Map<java.lang.String, java.lang.String>)
+2019-10-28 11:09:13,921 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu/],methods=[POST],consumes=[application/json],produces=[application/json]}" onto public org.springframework.http.ResponseEntity<java.lang.Object> com.howtodoinjava.rest.controller.EmployeeController.addEmployee(java.lang.String,java.lang.String,com.howtodoinjava.rest.model.Employee) throws java.lang.Exception
+2019-10-28 11:09:13,925 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-10-28 11:09:13,926 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-10-28 11:09:13,958 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:09:13,958 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:09:13,979 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Detected @ExceptionHandler methods in customExceptionHandler
+2019-10-28 11:09:14,233 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2019-10-28 11:09:14,264 [restartedMain] INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2019-10-28 11:09:14,308 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8020 (http) with context path ''
+2019-10-28 11:09:14,313 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - Started SpringBootDemoApplication in 4.348 seconds (JVM running for 5.308)
+2019-10-28 11:09:20,753 [http-nio-8020-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+2019-10-28 11:09:20,791 [http-nio-8020-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 38 ms
+2019-10-28 11:09:20,975 [http-nio-8020-exec-2] WARN  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Resolved exception caused by handler execution: org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character ('<' (code 60)): expected a valid value (number, String, array, object, 'true', 'false' or 'null'); nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character ('<' (code 60)): expected a valid value (number, String, array, object, 'true', 'false' or 'null')
+ at [Source: (PushbackInputStream); line: 1, column: 2]
+2019-10-28 11:09:37,090 [http-nio-8020-exec-4] WARN  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Resolved exception caused by handler execution: org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/xml;charset=UTF-8' not supported
+2019-10-28 11:13:15,875 [Thread-6] INFO  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@7064a880: startup date [Mon Oct 28 11:09:10 ICT 2019]; root of context hierarchy
+2019-10-28 11:13:15,886 [Thread-6] INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2019-10-28 11:13:15,892 [Thread-6] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'threadPoolTaskExecutor'
+2019-10-28 11:13:16,307 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBURLOSSDB
+2019-10-28 11:13:16,308 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBPASSOSSDB
+2019-10-28 11:13:16,308 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBUSEROSSDB
+2019-10-28 11:13:16,308 [restartedMain] INFO  com.vnm.erp - listener_port = 8017
+2019-10-28 11:13:16,308 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_type
+2019-10-28 11:13:16,308 [restartedMain] INFO  com.vnm.erp - OTP_TYPE = 0
+2019-10-28 11:13:16,308 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_length
+2019-10-28 11:13:16,308 [restartedMain] INFO  com.vnm.erp - OTP_LENGTH = 0
+2019-10-28 11:13:16,308 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_live_time
+2019-10-28 11:13:16,308 [restartedMain] INFO  com.vnm.erp - OTP_LIVE_TIME = 0
+2019-10-28 11:13:16,350 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - Starting SpringBootDemoApplication on lit11 with PID 46428 (started by trieu_nq in C:\Users\trieu_nq\workspace\CRM)
+2019-10-28 11:13:16,350 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - No active profile set, falling back to default profiles: default
+2019-10-28 11:13:16,353 [restartedMain] INFO  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@40b97b0d: startup date [Mon Oct 28 11:13:16 ICT 2019]; root of context hierarchy
+2019-10-28 11:13:16,940 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2019-10-28 11:13:17,112 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 759 ms
+2019-10-28 11:13:17,130 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+2019-10-28 11:13:17,131 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-10-28 11:13:17,132 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-10-28 11:13:17,132 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-10-28 11:13:17,133 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2019-10-28 11:13:17,149 [restartedMain] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService  'threadPoolTaskExecutor'
+2019-10-28 11:13:17,173 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:13:17,213 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@40b97b0d: startup date [Mon Oct 28 11:13:16 ICT 2019]; root of context hierarchy
+2019-10-28 11:13:17,222 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-10-28 11:13:17,223 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-10-28 11:13:17,232 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:13:17,233 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:13:17,275 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2019-10-28 11:13:17,292 [restartedMain] INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2019-10-28 11:13:17,305 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2019-10-28 11:13:17,306 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - Started SpringBootDemoApplication in 0.987 seconds (JVM running for 248.3)
+2019-10-28 11:13:17,310 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2019-10-28 11:13:27,699 [Thread-10] INFO  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@40b97b0d: startup date [Mon Oct 28 11:13:16 ICT 2019]; root of context hierarchy
+2019-10-28 11:13:27,704 [Thread-10] INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2019-10-28 11:13:27,707 [Thread-10] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'threadPoolTaskExecutor'
+2019-10-28 11:13:28,119 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBURLOSSDB
+2019-10-28 11:13:28,119 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBPASSOSSDB
+2019-10-28 11:13:28,119 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBUSEROSSDB
+2019-10-28 11:13:28,119 [restartedMain] INFO  com.vnm.erp - listener_port = 8017
+2019-10-28 11:13:28,119 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_type
+2019-10-28 11:13:28,119 [restartedMain] INFO  com.vnm.erp - OTP_TYPE = 0
+2019-10-28 11:13:28,119 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_length
+2019-10-28 11:13:28,119 [restartedMain] INFO  com.vnm.erp - OTP_LENGTH = 0
+2019-10-28 11:13:28,119 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_live_time
+2019-10-28 11:13:28,119 [restartedMain] INFO  com.vnm.erp - OTP_LIVE_TIME = 0
+2019-10-28 11:13:28,146 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - Starting SpringBootDemoApplication on lit11 with PID 46428 (C:\Users\trieu_nq\workspace\CRM\target\classes started by trieu_nq in C:\Users\trieu_nq\workspace\CRM)
+2019-10-28 11:13:28,146 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - No active profile set, falling back to default profiles: default
+2019-10-28 11:13:28,149 [restartedMain] INFO  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@a8fd761: startup date [Mon Oct 28 11:13:28 ICT 2019]; root of context hierarchy
+2019-10-28 11:13:28,742 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8020 (http)
+2019-10-28 11:13:28,879 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 730 ms
+2019-10-28 11:13:28,886 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+2019-10-28 11:13:28,887 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-10-28 11:13:28,887 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-10-28 11:13:28,887 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-10-28 11:13:28,887 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2019-10-28 11:13:28,894 [restartedMain] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService  'threadPoolTaskExecutor'
+2019-10-28 11:13:28,911 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:13:28,945 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@a8fd761: startup date [Mon Oct 28 11:13:28 ICT 2019]; root of context hierarchy
+2019-10-28 11:13:28,954 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-10-28 11:13:28,956 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-10-28 11:13:28,962 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:13:28,963 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:13:29,002 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2019-10-28 11:13:29,019 [restartedMain] INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2019-10-28 11:13:29,028 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8020 (http) with context path ''
+2019-10-28 11:13:29,029 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - Started SpringBootDemoApplication in 0.906 seconds (JVM running for 260.022)
+2019-10-28 11:13:29,031 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2019-10-28 11:15:13,195 [main] ERROR com.vnm.erp - Get Config file fail with key : DBURLOSSDB
+2019-10-28 11:15:13,195 [main] ERROR com.vnm.erp - Get Config file fail with key : DBPASSOSSDB
+2019-10-28 11:15:13,195 [main] ERROR com.vnm.erp - Get Config file fail with key : DBUSEROSSDB
+2019-10-28 11:15:13,195 [main] INFO  com.vnm.erp - listener_port = 8017
+2019-10-28 11:15:13,195 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_type
+2019-10-28 11:15:13,196 [main] INFO  com.vnm.erp - OTP_TYPE = 0
+2019-10-28 11:15:13,196 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_length
+2019-10-28 11:15:13,196 [main] INFO  com.vnm.erp - OTP_LENGTH = 0
+2019-10-28 11:15:13,196 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_live_time
+2019-10-28 11:15:13,196 [main] INFO  com.vnm.erp - OTP_LIVE_TIME = 0
+2019-10-28 11:15:13,462 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBURLOSSDB
+2019-10-28 11:15:13,462 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBPASSOSSDB
+2019-10-28 11:15:13,463 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBUSEROSSDB
+2019-10-28 11:15:13,463 [restartedMain] INFO  com.vnm.erp - listener_port = 8017
+2019-10-28 11:15:13,463 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_type
+2019-10-28 11:15:13,463 [restartedMain] INFO  com.vnm.erp - OTP_TYPE = 0
+2019-10-28 11:15:13,463 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_length
+2019-10-28 11:15:13,463 [restartedMain] INFO  com.vnm.erp - OTP_LENGTH = 0
+2019-10-28 11:15:13,464 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_live_time
+2019-10-28 11:15:13,464 [restartedMain] INFO  com.vnm.erp - OTP_LIVE_TIME = 0
+2019-10-28 11:15:13,973 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - Starting SpringBootDemoApplication on lit11 with PID 36172 (C:\Users\trieu_nq\workspace\CRM\target\classes started by trieu_nq in C:\Users\trieu_nq\workspace\CRM)
+2019-10-28 11:15:13,974 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - No active profile set, falling back to default profiles: default
+2019-10-28 11:15:14,047 [restartedMain] INFO  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@5059e164: startup date [Mon Oct 28 11:15:14 ICT 2019]; root of context hierarchy
+2019-10-28 11:15:16,115 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8020 (http)
+2019-10-28 11:15:16,399 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2352 ms
+2019-10-28 11:15:16,495 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+2019-10-28 11:15:16,499 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-10-28 11:15:16,500 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-10-28 11:15:16,500 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-10-28 11:15:16,500 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2019-10-28 11:15:17,188 [restartedMain] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService  'threadPoolTaskExecutor'
+2019-10-28 11:15:17,308 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:15:17,397 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@5059e164: startup date [Mon Oct 28 11:15:14 ICT 2019]; root of context hierarchy
+2019-10-28 11:15:17,509 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu/start.swe],methods=[POST]}" onto public java.lang.String com.howtodoinjava.rest.controller.EmployeeController.getEmployees(org.springframework.http.HttpEntity<java.lang.String>,java.util.Map<java.lang.String, java.lang.String>)
+2019-10-28 11:15:17,510 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu],methods=[GET],produces=[application/json]}" onto public com.howtodoinjava.rest.model.Employees com.howtodoinjava.rest.controller.EmployeeController.getEmployees1()
+2019-10-28 11:15:17,511 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu/],methods=[POST],consumes=[application/json],produces=[application/json]}" onto public org.springframework.http.ResponseEntity<java.lang.Object> com.howtodoinjava.rest.controller.EmployeeController.addEmployee(java.lang.String,java.lang.String,com.howtodoinjava.rest.model.Employee) throws java.lang.Exception
+2019-10-28 11:15:17,519 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-10-28 11:15:17,520 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-10-28 11:15:17,557 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:15:17,558 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:15:17,583 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Detected @ExceptionHandler methods in customExceptionHandler
+2019-10-28 11:15:17,913 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2019-10-28 11:15:17,957 [restartedMain] INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2019-10-28 11:15:18,007 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8020 (http) with context path ''
+2019-10-28 11:15:18,014 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - Started SpringBootDemoApplication in 4.542 seconds (JVM running for 5.541)
+2019-10-28 11:15:31,357 [http-nio-8020-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+2019-10-28 11:15:31,390 [http-nio-8020-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 33 ms
+2019-10-28 11:15:31,565 [http-nio-8020-exec-1] WARN  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Resolved exception caused by handler execution: org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/xml;charset=UTF-8' not supported
+2019-10-28 11:15:40,619 [main] ERROR com.vnm.erp - Get Config file fail with key : DBURLOSSDB
+2019-10-28 11:15:40,619 [main] ERROR com.vnm.erp - Get Config file fail with key : DBPASSOSSDB
+2019-10-28 11:15:40,619 [main] ERROR com.vnm.erp - Get Config file fail with key : DBUSEROSSDB
+2019-10-28 11:15:40,619 [main] INFO  com.vnm.erp - listener_port = 8017
+2019-10-28 11:15:40,620 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_type
+2019-10-28 11:15:40,620 [main] INFO  com.vnm.erp - OTP_TYPE = 0
+2019-10-28 11:15:40,620 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_length
+2019-10-28 11:15:40,620 [main] INFO  com.vnm.erp - OTP_LENGTH = 0
+2019-10-28 11:15:40,620 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_live_time
+2019-10-28 11:15:40,620 [main] INFO  com.vnm.erp - OTP_LIVE_TIME = 0
+2019-10-28 11:15:40,881 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBURLOSSDB
+2019-10-28 11:15:40,882 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBPASSOSSDB
+2019-10-28 11:15:40,882 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : DBUSEROSSDB
+2019-10-28 11:15:40,882 [restartedMain] INFO  com.vnm.erp - listener_port = 8017
+2019-10-28 11:15:40,882 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_type
+2019-10-28 11:15:40,883 [restartedMain] INFO  com.vnm.erp - OTP_TYPE = 0
+2019-10-28 11:15:40,883 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_length
+2019-10-28 11:15:40,884 [restartedMain] INFO  com.vnm.erp - OTP_LENGTH = 0
+2019-10-28 11:15:40,884 [restartedMain] ERROR com.vnm.erp - Get Config file fail with key : otp_live_time
+2019-10-28 11:15:40,884 [restartedMain] INFO  com.vnm.erp - OTP_LIVE_TIME = 0
+2019-10-28 11:15:41,383 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - Starting SpringBootDemoApplication on lit11 with PID 49796 (C:\Users\trieu_nq\workspace\CRM\target\classes started by trieu_nq in C:\Users\trieu_nq\workspace\CRM)
+2019-10-28 11:15:41,383 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - No active profile set, falling back to default profiles: default
+2019-10-28 11:15:41,455 [restartedMain] INFO  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@ec16f0: startup date [Mon Oct 28 11:15:41 ICT 2019]; root of context hierarchy
+2019-10-28 11:15:43,432 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8020 (http)
+2019-10-28 11:15:43,683 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2228 ms
+2019-10-28 11:15:43,760 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.ServletRegistrationBean - Servlet dispatcherServlet mapped to [/]
+2019-10-28 11:15:43,764 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-10-28 11:15:43,765 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-10-28 11:15:43,765 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-10-28 11:15:43,765 [localhost-startStop-1] INFO  org.springframework.boot.web.servlet.FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2019-10-28 11:15:44,436 [restartedMain] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService  'threadPoolTaskExecutor'
+2019-10-28 11:15:44,542 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:15:44,617 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@ec16f0: startup date [Mon Oct 28 11:15:41 ICT 2019]; root of context hierarchy
+2019-10-28 11:15:44,712 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu/],methods=[POST],consumes=[application/json],produces=[application/json]}" onto public org.springframework.http.ResponseEntity<java.lang.Object> com.howtodoinjava.rest.controller.EmployeeController.addEmployee(java.lang.String,java.lang.String,com.howtodoinjava.rest.model.Employee) throws java.lang.Exception
+2019-10-28 11:15:44,713 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu/start.swe],methods=[POST]}" onto public java.lang.String com.howtodoinjava.rest.controller.EmployeeController.getEmployees(org.springframework.http.HttpEntity<java.lang.String>,java.util.Map<java.lang.String, java.lang.String>)
+2019-10-28 11:15:44,714 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/eai_enu],methods=[GET],produces=[application/json]}" onto public com.howtodoinjava.rest.model.Employees com.howtodoinjava.rest.controller.EmployeeController.getEmployees1()
+2019-10-28 11:15:44,717 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-10-28 11:15:44,718 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-10-28 11:15:44,752 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:15:44,752 [restartedMain] INFO  org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-28 11:15:44,772 [restartedMain] INFO  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Detected @ExceptionHandler methods in customExceptionHandler
+2019-10-28 11:15:45,054 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2019-10-28 11:15:45,087 [restartedMain] INFO  org.springframework.jmx.export.annotation.AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2019-10-28 11:15:45,131 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8020 (http) with context path ''
+2019-10-28 11:15:45,138 [restartedMain] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - Started SpringBootDemoApplication in 4.245 seconds (JVM running for 5.21)
+2019-10-28 11:15:49,706 [http-nio-8020-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+2019-10-28 11:15:49,736 [http-nio-8020-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 29 ms
+2019-10-28 11:15:49,851 [http-nio-8020-exec-1] WARN  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - Resolved exception caused by handler execution: org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/xml;charset=UTF-8' not supported
+2019-10-28 11:17:33,039 [main] ERROR com.vnm.erp - Get Config file fail with key : DBURLOSSDB
+2019-10-28 11:17:33,040 [main] ERROR com.vnm.erp - Get Config file fail with key : DBPASSOSSDB
+2019-10-28 11:17:33,040 [main] ERROR com.vnm.erp - Get Config file fail with key : DBUSEROSSDB
+2019-10-28 11:17:33,041 [main] INFO  com.vnm.erp - listener_port = 8017
+2019-10-28 11:17:33,041 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_type
+2019-10-28 11:17:33,042 [main] INFO  com.vnm.erp - OTP_TYPE = 0
+2019-10-28 11:17:33,042 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_length
+2019-10-28 11:17:33,044 [main] INFO  com.vnm.erp - OTP_LENGTH = 0
+2019-10-28 11:17:33,044 [main] ERROR com.vnm.erp - Get Config file fail with key : otp_live_time
+2019-10-28 11:17:33,045 [main] INFO  com.vnm.erp - OTP_LIVE_TIME = 0
+2019-10-28 11:17:33,760 [main] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - Starting SpringBootDemoApplication v0.0.1-SNAPSHOT on lit11 with PID 49684 (C:\Users\trieu_nq\workspace\CRM\target\springbootdemo-0.0.1-SNAPSHOT.jar started by trieu_nq in C:\Users\trieu_nq\workspace\CRM)
+2019-10-28 11:17:33,762 [main] INFO  com.howtodoinjava.rest.SpringBootDemoApplication - No active profile set, falling back to default profiles: default
+2019-10-28 11:17:33,835 [main] INFO  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4f4a7090: startup date [Mon Oct 28 11:17:33 ICT 2019]; root of context hierarchy
+2019-10-28 11:17:35,559 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8020 (http)
+2019-10-28 11:17:35,751 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1916 ms
