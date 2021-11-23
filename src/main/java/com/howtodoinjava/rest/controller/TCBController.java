@@ -55,12 +55,15 @@ import com.vnm.erp.cover.GlobalVariables;
 import com.vnm.erp.cover.JavaSecutityEncrypt_V2;
 import com.vnm.erp.cover.JavaSignSHA256;
 import com.vnm.erp.cover.JavaSignSHA256_V2;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping(path = "/tcb")
 public class TCBController {
 
-    @GetMapping(path = "/pushstatus", consumes = {MediaType.APPLICATION_JSON_VALUE,
+    String basic_token = "c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx";
+    
+    @PostMapping(path = "/pushstatus", consumes = {MediaType.APPLICATION_JSON_VALUE,
         MediaType.APPLICATION_XML_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE,
         MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
@@ -107,7 +110,7 @@ public class TCBController {
         return gson.toJson(GetPUSHSTATUS(Xml));
     }
 
-    @GetMapping(path = "/updatestatus", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
+    @PostMapping(path = "/updatestatus", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
         MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
     public String updatestatus(@RequestBody String xml) {
@@ -413,7 +416,7 @@ public class TCBController {
             TokenInfo = tokenInfo;
         }
     }
-
+    
     @GetMapping(path = "/createactiveurl", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
         MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
@@ -1213,11 +1216,16 @@ public class TCBController {
             @RequestParam("FrAcct_AcctId") String frAcct_AcctId,
             @RequestParam("FrAcct_AcctTitl") String frAcct_AcctTitl,
             @RequestParam("ToAcct_AcctId") String toAcct_AcctId,
-            @RequestParam("ToAcct_AcctTitl") String toAcct_AcctTitl, @RequestParam("ToAcct_Citad") String toAcct_Citad,
-            @RequestParam("ToAcct_CustName") String toAcct_CustName, @RequestParam("TxAmt") String TxAmt,
-            @RequestParam("PaymentType") String payment_type, @RequestParam("customerID") String customerID,
-            @RequestParam("frAccId") String frAccId, @RequestParam("frAccTitl") String frAccTitl,
-            @RequestParam("toAccId") String toAccId, @RequestParam("toAccTitl") String toAccTitl,
+            @RequestParam("ToAcct_AcctTitl") String toAcct_AcctTitl, 
+            @RequestParam("ToAcct_Citad") String toAcct_Citad,
+            @RequestParam("ToAcct_CustName") String toAcct_CustName, 
+            @RequestParam("TxAmt") String TxAmt,
+            @RequestParam("PaymentType") String payment_type, 
+            @RequestParam("customerID") String customerID,
+            @RequestParam("frAccId") String frAccId, 
+            @RequestParam("frAccTitl") String frAccTitl,
+            @RequestParam("toAccId") String toAccId, 
+            @RequestParam("toAccTitl") String toAccTitl,
             @RequestParam("toAccName") String toAccName
     ) {
         Gson gson = new Gson();
@@ -1295,11 +1303,11 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446/services/bank/collection/PartnerToTCB/v1");
-
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:448/Partner2TCB/MOBICAST_payment_v3");
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
         post.setHeader("SOAPAction", "FundTransfer");
+        post.setHeader("Authorization","Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
         try {
             xmlEntity = new StringEntity(postdata);
             System.out.println(postdata);
@@ -1386,10 +1394,11 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446/services/bank/collection/PartnerToTCB/v1");
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:448/Partner2TCB/MOBICAST_payment_v3");
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
         post.setHeader("SOAPAction", "AccountInfo");
+        post.setHeader("Authorization","Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
         try {
             xmlEntity = new StringEntity(postdata);
             System.out.println(postdata);
@@ -1541,11 +1550,13 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446/services/bank/collection/PartnerToTCB/v1");
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:448/Partner2TCB/MOBICAST_payment_v3");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
         post.setHeader("SOAPAction", "CardTokenTrxnRefund");
+        post.setHeader("Authorization","Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
+        
         try {
             xmlEntity = new StringEntity(postdata);
             System.out.println(postdata);
