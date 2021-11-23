@@ -56,11 +56,15 @@ import com.vnm.erp.cover.JavaSecutityEncrypt_V2;
 import com.vnm.erp.cover.JavaSignSHA256;
 import com.vnm.erp.cover.JavaSignSHA256_V2;
 
+import org.springframework.web.bind.annotation.PostMapping;
+
 @RestController
 @RequestMapping(path = "/tcb")
 public class TCBController {
 
-    @GetMapping(path = "/pushstatus", consumes = {MediaType.APPLICATION_JSON_VALUE,
+    String basic_token = "c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx";
+    
+    @PostMapping(path = "/pushstatus", consumes = {MediaType.APPLICATION_JSON_VALUE,
         MediaType.APPLICATION_XML_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE,
         MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
@@ -107,7 +111,7 @@ public class TCBController {
         return gson.toJson(GetPUSHSTATUS(Xml));
     }
 
-    @GetMapping(path = "/updatestatus", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
+    @PostMapping(path = "/updatestatus", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
         MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
     public String updatestatus(@RequestBody String xml) {
@@ -413,7 +417,7 @@ public class TCBController {
             TokenInfo = tokenInfo;
         }
     }
-
+    
     @GetMapping(path = "/createactiveurl", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
         MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
@@ -448,11 +452,8 @@ public class TCBController {
         HttpResponse response;
         String result = "";
         try {
-        	SSLSocketFactory sf = new SSLSocketFactory(sslContext);
-			Scheme httpsScheme = new Scheme("https", 443, sf);
-			SchemeRegistry schemeRegistry = new SchemeRegistry();
-			schemeRegistry.register(httpsScheme);
-			SSLContext sslContext = SSLContext.getInstance("SSL");
+ 
+        	SSLContext sslContext = SSLContext.getInstance("SSL");
 
 			// set up a TrustManager that trusts everything
 			sslContext.init(null, new TrustManager[] { new X509TrustManager() {
@@ -472,9 +473,15 @@ public class TCBController {
 			            }
 			} }, new SecureRandom());
 
+			@SuppressWarnings("deprecation")
+			SSLSocketFactory sf = new SSLSocketFactory(sslContext);
+			Scheme httpsScheme = new Scheme("https", 446, sf);
+			SchemeRegistry schemeRegistry = new SchemeRegistry();
+			schemeRegistry.register(httpsScheme);
+
 			// apache HttpClient version >4.2 should use BasicClientConnectionManager
 			ClientConnectionManager cm = new SingleClientConnManager(schemeRegistry);
-			DefaultHttpClient httpClient = new DefaultHttpClient(cm); 
+			DefaultHttpClient httpClient = new DefaultHttpClient(cm);
             HttpPost post = new HttpPost("https://api.techcombank.com.vn:446/services/bank/collection/CardToken/v1") ;
 
             post.setHeader("Content-Type", "text/xml;charset=UTF-8");
@@ -777,7 +784,7 @@ public class TCBController {
         UUID uuid = UUID.randomUUID();
         String TxId = "MBC" + uuid.toString();
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd HH:mi:ss");
+        DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
         String postdata = "<CardTokenTrxnTopupReq xsi:schemaLocation=\"http://www.techcombank.com.vn/services/bank/collection /v1 Partner2TCB.xsd\""
                 + "	xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\""
@@ -931,7 +938,7 @@ public class TCBController {
         UUID uuid = UUID.randomUUID();
         String TxId = "MBC" + uuid.toString();
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd HH:mi:ss");
+        DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
         String postdata = "<CardTokenTrxnSaleReq xsi:schemaLocation=\"http://www.techcombank.com.vn/services/bank/collection /v1\""
                 + "	xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\""
@@ -1028,7 +1035,7 @@ public class TCBController {
         UUID uuid = UUID.randomUUID();
         String TxId = "MBC" + uuid.toString();
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd HH:mi:ss");
+        DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String postdata = "<CardTokenTrxnWithdrawReq xsi:schemaLocation=\"http://www.techcombank.com.vn/services/bank/collection /v1\""
                 + "	xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\""
                 + "	xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" + "	<ReqGnlInf>" + "		<Id>"
@@ -1045,7 +1052,7 @@ public class TCBController {
                 + "</TraceNumber>" + "		<TrxnAmount>" + TrxnAmount + "</TrxnAmount>"
                 + "		<TrxnCurrency>vnd</TrxnCurrency>" + "		<Description>" + Description + "</Description>"
                 + "		<InvoiceNumber>" + TransactionWalnetID + "</InvoiceNumber>"
-                + "		<RequestDateTime>yyyy-MM-dd HH:mi:ss</RequestDateTime>" + "	</ReqInf>"
+                + "		<RequestDateTime>yyyy-MM-dd hh:mm:ss</RequestDateTime>" + "	</ReqInf>"
                 + "</CardTokenTrxnWithdrawReq> ";
         StringEntity xmlEntity;
         HttpResponse response;
@@ -1124,7 +1131,7 @@ public class TCBController {
         UUID uuid = UUID.randomUUID();
         String TxId = "MBC" + uuid.toString();
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd HH:mi:ss");
+        DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String postdata = "<CardTokenTrxnRefundReq xsi:schemaLocation=\"http://www.techcombank.com.vn/services/bank/collection/v1\""
                 + "	xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\""
                 + "	xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" + "	<ReqGnlInf>" + "		<Id>"
@@ -1213,11 +1220,16 @@ public class TCBController {
             @RequestParam("FrAcct_AcctId") String frAcct_AcctId,
             @RequestParam("FrAcct_AcctTitl") String frAcct_AcctTitl,
             @RequestParam("ToAcct_AcctId") String toAcct_AcctId,
-            @RequestParam("ToAcct_AcctTitl") String toAcct_AcctTitl, @RequestParam("ToAcct_Citad") String toAcct_Citad,
-            @RequestParam("ToAcct_CustName") String toAcct_CustName, @RequestParam("TxAmt") String TxAmt,
-            @RequestParam("PaymentType") String payment_type, @RequestParam("customerID") String customerID,
-            @RequestParam("frAccId") String frAccId, @RequestParam("frAccTitl") String frAccTitl,
-            @RequestParam("toAccId") String toAccId, @RequestParam("toAccTitl") String toAccTitl,
+            @RequestParam("ToAcct_AcctTitl") String toAcct_AcctTitl, 
+            @RequestParam("ToAcct_Citad") String toAcct_Citad,
+            @RequestParam("ToAcct_CustName") String toAcct_CustName, 
+            @RequestParam("TxAmt") String TxAmt,
+            @RequestParam("PaymentType") String payment_type, 
+            @RequestParam("customerID") String customerID,
+            @RequestParam("frAccId") String frAccId, 
+            @RequestParam("frAccTitl") String frAccTitl,
+            @RequestParam("toAccId") String toAccId, 
+            @RequestParam("toAccTitl") String toAccTitl,
             @RequestParam("toAccName") String toAccName
     ) {
         Gson gson = new Gson();
@@ -1234,7 +1246,7 @@ public class TCBController {
         UUID uuid = UUID.randomUUID();
         String TxId = "MBC" + uuid.toString();
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd HH:mi:ss");
+        DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String strRequestDt = RequestDt.format(new Date());
         String _pathPublic = "/mobivi.cer";
         String signature1 = "";
@@ -1295,11 +1307,11 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446/services/bank/collection/PartnerToTCB/v1");
-
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/Partner2TCB/MOBICAST_payment_v3");
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
         post.setHeader("SOAPAction", "FundTransfer");
+        post.setHeader("Authorization","Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
         try {
             xmlEntity = new StringEntity(postdata);
             System.out.println(postdata);
@@ -1350,9 +1362,9 @@ public class TCBController {
         UUID uuid = UUID.randomUUID();
         String TxId = "MBC" + uuid.toString();
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd HH:mi:ss");
+        DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String strRequestDt = RequestDt.format(new Date());
-        String _pathPublic = "/mobivi.cer";
+        String _pathPublic = "tcb_mahoa.cer";
         String ReqInf = JavaSignSHA256_V2.signData_SHA256(
                 "AcctInq" + uuid.toString() + SvcName + Name + SubjectRole + MsgGroupReference + AcctId);
         return PostAccountInfo(SvcName, uuid.toString(), TxId, ClientTerminalSeqNum, Bindata, Token, Name, ORG,
@@ -1386,10 +1398,11 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446/services/bank/collection/PartnerToTCB/v1");
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/Partner2TCB/MOBICAST_payment_v3");
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
         post.setHeader("SOAPAction", "AccountInfo");
+        post.setHeader("Authorization","Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
         try {
             xmlEntity = new StringEntity(postdata);
             System.out.println(postdata);
@@ -1499,60 +1512,103 @@ public class TCBController {
     @ResponseBody
     public String InqListBankInfo(@RequestParam("CustomerID") String CustomerID) {
         Gson gson = new Gson();
+        System.out.println("223ww23");
+
         return gson.toJson(GetInqListBankInfo(CustomerID));
     }
 
     public String PostInqListBankInfo(String CustomerID) {
-        UUID uuid = UUID.randomUUID();
+    	String sign=encriptFundTransfer("","","","");
+        UUID uuid = UUID.randomUUID(); 
         String TxId = "MBC" + uuid.toString();
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd HH:mi:ss");
-        String postdata = "<soapenv:Envelope" + "	xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\""
-                + "	xmlns:v1=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"
-                + "	< soapenv:Header />"
-                + "	<soapenv:Body>"
-                + "		<InqBnkInfReq"
-                + "			xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"
-                + "			<ReqGnlInf>"
-                + "				<Id>" + uuid.toString() + "</Id>"
-                + "				<TxId>"
-                + TxId + "</TxId>"
-                + "				<CreDtTm>" + CreDtTm.format(new Date())
-                + "</CreDtTm>"
-                + "				<Desc>Inquiry List Bank Info</Desc>"
-                + "				<Sgntr/>"
-                + "			</ReqGnlInf>"
-                + "			<Envt>" + "				<SrcPty>"
-                + "					<Nm>"
-                + CustomerID + "</Nm>" + "				</SrcPty>"
-                + "				<Rqstr>"
-                + "					<Nm>Call from Customer</Nm>"
-                + "				</Rqstr>" + "			</Envt>"
-                + "			<ReqInf>"
-                + "				<BkId>ALL</BkId>"
-                + "			</ReqInf>"
-                + "		</InqBnkInfReq>"
-                + "	</soapenv:Body>"
-                + "</soapenv:Envelope> ";
+        DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+ 
+        String postdata = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v1=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"+
+ "    <soapenv:Header/>"+
+ "    <soapenv:Body>"+
+ "        <v1:InqBnkInfReq xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"+
+ "            <v1:ReqGnlInf>"+
+ "                <v1:Id>"+uuid.toString()+"</v1:Id>"+
+ "                <v1:TxId>77771</v1:TxId>"+
+ "                <v1:CreDtTm>"+CreDtTm.format(new Date())+"</v1:CreDtTm>"+
+ "                <v1:Sgntr>"+sign+"</v1:Sgntr>"+
+ "            </v1:ReqGnlInf>"+
+ "            <v1:Envt>"+
+ "                <v1:SrcPty>"+
+ "                    <v1:Nm>MOBICAST</v1:Nm>"+
+ "                </v1:SrcPty>"+
+ "                <v1:TrgtPty>"+
+ "                    <v1:Nm>H2H</v1:Nm>"+
+ "                </v1:TrgtPty>"+
+ "            </v1:Envt>"+
+ "            <v1:ReqInf>"+
+ "                <v1:BkId>ALL</v1:BkId>"+
+ "            </v1:ReqInf>"+
+ "        </v1:InqBnkInfReq>"+
+ "    </soapenv:Body>"+
+ "</soapenv:Envelope>";
+        System.out.println("22311123222ww23");
+
         StringEntity xmlEntity;
         HttpResponse response;
         String result = "";
-        DefaultHttpClient httpClient = new DefaultHttpClient();
-        HttpParams params = httpClient.getParams();
+       
+        System.out.println("223222ww23");
+
+        try {
+        	SSLContext sslContext = SSLContext.getInstance("SSL");
+            System.out.println("22322222ww23");
+
+		// set up a TrustManager that trusts everything
+		sslContext.init(null, new TrustManager[] { new X509TrustManager() {
+		            public X509Certificate[] getAcceptedIssuers() {
+		                    System.out.println("getAcceptedIssuers =============");
+		                    return null;
+		            }
+
+		            public void checkClientTrusted(X509Certificate[] certs,
+		                            String authType) {
+		                    System.out.println("checkClientTrusted =============");
+		            }
+
+		            public void checkServerTrusted(X509Certificate[] certs,
+		                            String authType) {
+		                    System.out.println("checkServerTrusted =============");
+		            }
+		} }, new SecureRandom());
+        System.out.println("22322aq2wsssssssssssssssssssssssssssssssssssssssssssssssssw23");
+
+		@SuppressWarnings("deprecation")
+		SSLSocketFactory sf = new SSLSocketFactory(sslContext);
+		Scheme httpsScheme = new Scheme("https", 446, sf);
+		SchemeRegistry schemeRegistry = new SchemeRegistry();
+		schemeRegistry.register(httpsScheme);
+        System.out.println("223222ww222222222222222222222222222222222223");
+
+		// apache HttpClient version >4.2 should use BasicClientConnectionManager
+		ClientConnectionManager cm = new SingleClientConnManager(schemeRegistry);
+		DefaultHttpClient httpClient = new DefaultHttpClient(cm);
+		HttpParams params = httpClient.getParams();
+        System.out.println("22322212hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhww23");
+
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446/services/bank/collection/PartnerToTCB/v1");
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/Partner2TCB/MOBICAST_payment_v3");
+        System.out.println("22323");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
-        post.setHeader("Connection", "Keep-Alive");
-        post.setHeader("SOAPAction", "CardTokenTrxnRefund");
-        try {
+        post.setHeader("Connection", "Keep-Alive"); 
+        post.setHeader("SOAPAction", "InqListBankInfo");
+        post.setHeader("Authorization","Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
             xmlEntity = new StringEntity(postdata);
             System.out.println(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
-            GlobalVariables.logger.info(result);post.releaseConnection();
+            GlobalVariables.logger.info("InqListBankInfo response"+response.getStatusLine().getStatusCode());
+            GlobalVariables.logger.info(result);
+            post.releaseConnection();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -1560,8 +1616,12 @@ public class TCBController {
     }
 
     BankAccountInfo GetInqListBankInfo(String CustomerID) {
+        System.out.println("2232qwq2211ww23");
+
         String tibcoxml = PostInqListBankInfo(CustomerID);
         BankAccountInfo m = new BankAccountInfo();
+        System.out.println("ok3");
+
         DocumentBuilder db;
         try {
             db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -1639,5 +1699,4 @@ public class TCBController {
         return JavaSignSHA256.encryptWithPublicKeyTCB(
                 RoutingRule + TrgtPty + SrcPty + TerminalId + CardInfo + TokenInfo + TrxnAmount + Otp + OtpTranId);
     }
-
 }
