@@ -473,7 +473,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("");
+        HttpPost post = new HttpPost("https://101.99.23.176:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -550,7 +550,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("");
+        HttpPost post = new HttpPost("https://101.99.23.176:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -624,7 +624,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("");
+        HttpPost post = new HttpPost("https://101.99.23.176:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -779,7 +779,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("");
+        HttpPost post = new HttpPost("https://101.99.23.176:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -934,7 +934,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("");
+        HttpPost post = new HttpPost("https://101.99.23.176:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -1030,7 +1030,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("");
+        HttpPost post = new HttpPost("https://101.99.23.176:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -1126,7 +1126,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("");
+        HttpPost post = new HttpPost("https://101.99.23.176:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -1271,7 +1271,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("");
+        HttpPost post = new HttpPost("https://101.99.23.176:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -1362,7 +1362,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("");
+        HttpPost post = new HttpPost("https://101.99.23.176:446");
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
         post.setHeader("SOAPAction", "AccountInfo");
@@ -1517,7 +1517,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("");
+        HttpPost post = new HttpPost("https://101.99.23.176:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
