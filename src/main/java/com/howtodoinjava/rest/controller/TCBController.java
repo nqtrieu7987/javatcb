@@ -1,57 +1,15 @@
 package com.howtodoinjava.rest.controller;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.StringReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.KeyStore;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.security.SecureRandom;
-import java.security.Signature;
-import java.security.SignatureException;
-import java.security.cert.CertificateFactory;
-import java.security.cert.X509Certificate;
-import java.security.interfaces.RSAPublicKey;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Base64;
-import java.util.Iterator;
-import java.util.Optional;
+import java.util.Date;
 import java.util.UUID;
 
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-import javax.xml.bind.DatatypeConverter;
-import javax.xml.crypto.AlgorithmMethod;
-import javax.xml.crypto.KeySelector;
-import javax.xml.crypto.KeySelectorException;
-import javax.xml.crypto.KeySelectorResult;
-import javax.xml.crypto.XMLCryptoContext;
-import javax.xml.crypto.XMLStructure;
-import javax.xml.crypto.dsig.XMLSignature;
-import javax.xml.crypto.dsig.XMLSignatureFactory;
-import javax.xml.crypto.dsig.dom.DOMValidateContext;
-import javax.xml.crypto.dsig.keyinfo.KeyInfo;
-import javax.xml.crypto.dsig.keyinfo.X509Data;
-import javax.xml.namespace.NamespaceContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -69,7 +27,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import com.google.gson.Gson;
@@ -158,7 +115,7 @@ public class TCBController {
                 + "xmlns:v1=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"
                 + "<v1:RspnInf>"
                 + "<v1:Id/><v1:TxId/>"
-                + "<v1:CreDtTm>" + (new SimpleDateFormat("yyyy-MM-dd")).format(LocalDateTime.now()) + "</v1:CreDtTm>"
+                + "<v1:CreDtTm>" + (new SimpleDateFormat("yyyy-MM-dd")).format(new Date()) + "</v1:CreDtTm>"
                 + "<v1:PmtTp/>"
                 + "<v1:Desc/>"
                 + "<v1:HeaderHashStr/>"
@@ -454,7 +411,7 @@ public class TCBController {
                 + "      <v1:ActiveUrlReq xsi:schemaLocation=\"http://www.techcombank.com.vn/services/bank/collection/v1 Partner2TCB.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
                 + "         <v1:ReqGnlInf>" + "            <v1:Id>" + uuid.toString() + "</v1:Id>"
                 + "            <v1:TxId>" + TxId + "</v1:TxId>" + "            <v1:CreDtTm>"
-                + CreDtTm.format(LocalDateTime.now()) + "</v1:CreDtTm>"
+                + CreDtTm.format(new Date()) + "</v1:CreDtTm>"
                 + "            <v1:RoutingRule>CreateActiveUrl</v1:RoutingRule>" + "            <v1:Sgntr>"
                 + "               <v1:Sgntr1>" + CreateActiveUrl(TxId, CustomerName, MobileNumber) + "</v1:Sgntr1>"
                 + "            </v1:Sgntr>" + "         </v1:ReqGnlInf>" + "         <v1:Envt>"
@@ -532,7 +489,7 @@ public class TCBController {
                 + "   <soapenv:Header/>" + "   <soapenv:Body>"
                 + "      <DeleteCardTokenReq xsi:schemaLocation=\"http://www.techcombank.com.vn/services/bank/collection/v1 Partner2TCB.xsd\" xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
                 + "         <ReqGnlInf>" + "            <Id>" + uuid.toString() + "</Id>" + "            <TxId>" + TxId
-                + "</TxId>" + "            <CreDtTm>" + CreDtTm.format(LocalDateTime.now()) + "</CreDtTm>"
+                + "</TxId>" + "            <CreDtTm>" + CreDtTm.format(new Date()) + "</CreDtTm>"
                 + "            <RoutingRule>DeleteCardTokenRequest</RoutingRule>" + "            <Desc/>"
                 + "            <HeaderHashStr/>" + "            <Sgntr>" + "               <Sgntr1>"
                 + otherApi(CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "</Sgntr1>" + "            </Sgntr>"
@@ -608,7 +565,7 @@ public class TCBController {
                 + "	xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\""
                 + "	xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" + "	<ReqGnlInf>" + "		<Id>"
                 + uuid.toString() + "</Id>" + "		<TxId>" + TxId + "</TxId>" + "		<CreDtTm>"
-                + CreDtTm.format(LocalDateTime.now()) + "</CreDtTm>" + "		<RoutingRule>" + RoutingRule
+                + CreDtTm.format(new Date()) + "</CreDtTm>" + "		<RoutingRule>" + RoutingRule
                 + "</RoutingRule>" + "		<Desc/>" + "		<HeaderHashStr/>" + "		<Sgntr>"
                 + "			<Sgntr1>" + otherApi(CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "</ Sgntr1>"
                 + "		</Sgntr>" + "	</ReqGnlInf>" + "	<Envt>" + "		<TrgtPty>" + "			<Nm>CARD</Nm>"
@@ -759,7 +716,7 @@ public class TCBController {
                 + "	xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\""
                 + "	xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" + "	<ReqGnlInf>" + "		<Id>"
                 + uuid.toString() + "</Id>" + "		<TxId>" + TxId + "</TxId>" + "		<CreDtTm>"
-                + CreDtTm.format(LocalDateTime.now()) + "</CreDtTm>"
+                + CreDtTm.format(new Date()) + "</CreDtTm>"
                 + "		<RoutingRule>CardTokenTrxnTopupRequest</RoutingRule>" + "		<Desc/>"
                 + "		<HeaderHashStr/>" + "		<Sgntr>" + "			<Sgntr1>"
                 + otherApi(CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "			</ Sgntr1>" + "		</Sgntr>"
@@ -770,7 +727,7 @@ public class TCBController {
                 + "		<TraceNumber>" + TransactionWalnetID + "</TraceNumber>" + "		<TrxnAmount>" + TrxnAmount
                 + "</TrxnAmount>" + "		<TrxnCurrency>vnd</TrxnCurrency>" + "		<Description>" + Des
                 + "</Description>" + "		<InvoiceNumber>" + TransactionWalnetID + "</InvoiceNumber>"
-                + "		<RequestDateTime>" + RequestDt.format(LocalDateTime.now()) + "</RequestDateTime>"
+                + "		<RequestDateTime>" + RequestDt.format(new Date()) + "</RequestDateTime>"
                 + "	</ReqInf>" + "</CardTokenTrxnTopupReq> ";
         StringEntity xmlEntity;
         HttpResponse response;
@@ -913,7 +870,7 @@ public class TCBController {
                 + "	xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\""
                 + "	xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" + "	<ReqGnlInf>" + "		<Id>"
                 + uuid.toString() + "</Id>" + "		<TxId>" + TxId + "</TxId>" + "		<CreDtTm>"
-                + CreDtTm.format(LocalDateTime.now()) + "</CreDtTm>"
+                + CreDtTm.format(new Date()) + "</CreDtTm>"
                 + "		<RoutingRule>CardTokenTrxnSaleRequest</RoutingRule>" + "		<Desc/>"
                 + "		<HeaderHashStr/>" + "		<Sgntr>" + "			<Sgntr1>"
                 + otherApi(CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "			</ Sgntr1>" + "		</Sgntr>"
@@ -925,7 +882,7 @@ public class TCBController {
                 + "</TraceNumber>" + "		<TrxnAmount>" + TrxnAmount + "</TrxnAmount>"
                 + "		<TrxnCurrency>vnd</TrxnCurrency>" + "		<Description>" + Description + "</Description>"
                 + "		<InvoiceNumber>" + TransactionWalnetID + "</InvoiceNumber>" + "		<RequestDateTime>"
-                + RequestDt.format(LocalDateTime.now()) + "</RequestDateTime>" + "	</ReqInf>"
+                + RequestDt.format(new Date()) + "</RequestDateTime>" + "	</ReqInf>"
                 + "</CardTokenTrxnSaleReq>";
         StringEntity xmlEntity;
         HttpResponse response;
@@ -1009,7 +966,7 @@ public class TCBController {
                 + "	xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\""
                 + "	xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" + "	<ReqGnlInf>" + "		<Id>"
                 + uuid.toString() + "</Id>" + "		<TxId>" + TxId + "</TxId>" + "		<CreDtTm>"
-                + CreDtTm.format(LocalDateTime.now()) + "</CreDtTm>"
+                + CreDtTm.format(new Date()) + "</CreDtTm>"
                 + "		<RoutingRule>CardTokenTrxnSaleRequest</RoutingRule>" + "		<Desc/>"
                 + "		<HeaderHashStr/>" + "		<Sgntr>" + "			<Sgntr1>"
                 + otherApi(CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "			</ Sgntr1>" + "		</Sgntr>"
@@ -1105,7 +1062,7 @@ public class TCBController {
                 + "	xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\""
                 + "	xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" + "	<ReqGnlInf>" + "		<Id>"
                 + uuid.toString() + "</Id>" + "		<TxId>" + TxId + "</TxId>" + "		<CreDtTm>"
-                + CreDtTm.format(LocalDateTime.now()) + "</CreDtTm>"
+                + CreDtTm.format(new Date()) + "</CreDtTm>"
                 + "		<RoutingRule>CardTokenTrxnRefundRequest</RoutingRule>" + "		<Desc/>"
                 + "		<HeaderHashStr/>" + "		<Sgntr>" + "			<Sgntr1>"
                 + otherApi(CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "			</ Sgntr1>" + "		</Sgntr>"
@@ -1117,7 +1074,7 @@ public class TCBController {
                 + "		<TraceNumber>" + TransactionWalnetID + "</TraceNumber>" + "		<TrxnAmount>" + TrxnAmount
                 + "</TrxnAmount>" + "		<TrxnCurrency>vnd</TrxnCurrency>" + "		<Description>" + Description
                 + "</Description>" + "		<OrigTranId>123456</OrigTranId>" + "		<RequestDateTime>"
-                + RequestDt.format(LocalDateTime.now()) + "</RequestDateTime>" + "	</ReqInf>"
+                + RequestDt.format(new Date()) + "</RequestDateTime>" + "	</ReqInf>"
                 + "</CardTokenTrxnRefundReq>";
         StringEntity xmlEntity;
         HttpResponse response;
@@ -1201,7 +1158,7 @@ public class TCBController {
         String TxId = "MBC" + uuid.toString();
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
 
-        return gson.toJson(PostFundTransfer(Description, uuid, TxId, payment_type, CreDtTm.format(LocalDateTime.now()), customerID, toAcct_Citad,
+        return gson.toJson(PostFundTransfer(Description, uuid, TxId, payment_type, CreDtTm.format(new Date()), customerID, toAcct_Citad,
                 TxAmt, frAccId, frAccTitl, toAccId, toAccTitl, toAccName));
 
     }
@@ -1211,7 +1168,7 @@ public class TCBController {
         String TxId = "MBC" + uuid.toString();
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd HH:mi:ss");
-        String strRequestDt = RequestDt.format(LocalDateTime.now());
+        String strRequestDt = RequestDt.format(new Date());
         String _pathPublic = "/mobivi.cer";
         String signature1 = "";
         String signature2 = "";
@@ -1221,7 +1178,7 @@ public class TCBController {
                 .signData_SHA256("FundTransfer" + uuid.toString() + AcctId + AcctTitl + strRequestDt + TxAmt);
 
         return "";// PostFundTransfer(Description, uuid.toString(), TxId, payment_type,
-        // CreDtTm.format(LocalDateTime.now()),
+        // CreDtTm.format(new Date()),
         // ReqInfEncrypted, signature1, signature2, customer_id);
     }
 
@@ -1327,12 +1284,12 @@ public class TCBController {
         String TxId = "MBC" + uuid.toString();
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd HH:mi:ss");
-        String strRequestDt = RequestDt.format(LocalDateTime.now());
+        String strRequestDt = RequestDt.format(new Date());
         String _pathPublic = "/mobivi.cer";
         String ReqInf = JavaSignSHA256_V2.signData_SHA256(
                 "AcctInq" + uuid.toString() + SvcName + Name + SubjectRole + MsgGroupReference + AcctId);
         return PostAccountInfo(SvcName, uuid.toString(), TxId, ClientTerminalSeqNum, Bindata, Token, Name, ORG,
-                SubjectRole, CreDtTm.format(LocalDateTime.now()), MsgGroupReference);
+                SubjectRole, CreDtTm.format(new Date()), MsgGroupReference);
     }
 
     public String PostAccountInfo(String SvcName, String id, String TxId, String ClientTerminalSeqNum, String Bindata,
@@ -1493,7 +1450,7 @@ public class TCBController {
                 + "				<Id>" + uuid.toString() + "</Id>"
                 + "				<TxId>"
                 + TxId + "</TxId>"
-                + "				<CreDtTm>" + CreDtTm.format(LocalDateTime.now())
+                + "				<CreDtTm>" + CreDtTm.format(new Date())
                 + "</CreDtTm>"
                 + "				<Desc>Inquiry List Bank Info</Desc>"
                 + "				<Sgntr/>"
