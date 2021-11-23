@@ -1,6 +1,9 @@
 package com.howtodoinjava.rest.controller;
 
 import java.io.StringReader;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,15 +11,23 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -426,16 +437,13 @@ public class TCBController {
         StringEntity xmlEntity;
         HttpResponse response;
         String result = "";
-        DefaultHttpClient httpClient = new DefaultHttpClient();
-        HttpParams params = httpClient.getParams();
-        HttpConnectionParams.setConnectionTimeout(params, 30000);
-        HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://101.99.23.176:446");
-
-        post.setHeader("Content-Type", "text/xml;charset=UTF-8");
-        post.setHeader("Connection", "Keep-Alive");
-        post.setHeader("SOAPAction", "CreateActiveUrl");
         try {
+        	CloseableHttpClient httpClient = createAcceptSelfSignedCertificateClient(); 
+            HttpPost post = new HttpPost("https://api.techcombank.com.vn:446") ;
+
+            post.setHeader("Content-Type", "text/xml;charset=UTF-8");
+            post.setHeader("Connection", "Keep-Alive");
+            post.setHeader("SOAPAction", "CreateActiveUrl");
             xmlEntity = new StringEntity(postdata);
             System.out.println(postdata);
             post.setEntity(xmlEntity);
@@ -448,7 +456,29 @@ public class TCBController {
         }
         return result;
     }
+    private static CloseableHttpClient createAcceptSelfSignedCertificateClient()
+            throws KeyManagementException, NoSuchAlgorithmException, KeyStoreException {
 
+        // use the TrustSelfSignedStrategy to allow Self Signed Certificates
+        SSLContext sslContext = SSLContextBuilder
+                .create()
+                .loadTrustMaterial(new TrustSelfSignedStrategy())
+                .build();
+
+        // we can optionally disable hostname verification. 
+        // if you don't want to further weaken the security, you don't have to include this.
+        HostnameVerifier allowAllHosts = new NoopHostnameVerifier();
+        
+        // create an SSL Socket Factory to use the SSLContext with the trust self signed certificate strategy
+        // and allow all hosts verifier.
+        SSLConnectionSocketFactory connectionFactory = new SSLConnectionSocketFactory(sslContext, allowAllHosts);
+        
+        // finally create the HttpClient using HttpClient factory methods and assign the ssl socket factory
+        return HttpClients
+                .custom()
+                .setSSLSocketFactory(connectionFactory)
+                .build();
+    }
     MyResult GetCreateActiveUrl(String CustomerName, String MobileNumber) {
         String tibcoxml = PostCreateActiveUrl(CustomerName, MobileNumber);
 
@@ -507,7 +537,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://101.99.23.176:446");
+        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -581,7 +611,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://101.99.23.176:446");
+        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -736,7 +766,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://101.99.23.176:446");
+        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -891,7 +921,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://101.99.23.176:446");
+        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -987,7 +1017,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://101.99.23.176:446");
+        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -1083,7 +1113,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://101.99.23.176:446");
+        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -1228,7 +1258,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://101.99.23.176:446");
+        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -1319,7 +1349,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://101.99.23.176:446");
+        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446");
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
         post.setHeader("SOAPAction", "AccountInfo");
@@ -1474,7 +1504,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://101.99.23.176:446");
+        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -1561,7 +1591,7 @@ public class TCBController {
         String TrgtPty = "TCB";
         String SrcPty = "MBC";
         String CustomerID = "+84" + MobileNumber.substring(1);
-        return JavaSignSHA256_V2.encryptWithPublicKeyTCB(
+        return JavaSignSHA256.encryptWithPublicKeyTCB(
                 TxId + RoutingRule + TrgtPty + SrcPty + CustomerID + CustomerName + MobileNumber);
     }
 
@@ -1570,7 +1600,7 @@ public class TCBController {
         String TrgtPty = "TCB";
         String SrcPty = "MBC";
         String TerminalId = "11021957";
-        return JavaSignSHA256_V2.encryptWithPublicKeyTCB(
+        return JavaSignSHA256.encryptWithPublicKeyTCB(
                 RoutingRule + TrgtPty + SrcPty + TerminalId + CardInfo + TokenInfo + TrxnAmount + Otp + OtpTranId);
     }
 
