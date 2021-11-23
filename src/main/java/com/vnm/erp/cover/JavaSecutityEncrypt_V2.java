@@ -211,7 +211,16 @@ public class JavaSecutityEncrypt_V2 {
             return null;
         }
     }
-
+    public static byte[] decrypt2(byte[] enSecretKey, PublicKey pubickey) {
+            try {
+                Cipher rsaCipher = Cipher.getInstance("RSA");
+                rsaCipher.init(2, pubickey);
+                byte[] decodedKeyBytes = rsaCipher.doFinal(enSecretKey);
+                return decodedKeyBytes;
+            } catch (Exception var4) {
+                return null;
+            }
+        }
     public static int getKeyLength(PublicKey publicKey) {
         try {
             RSAPublicKey rsaPk = (RSAPublicKey)publicKey;
