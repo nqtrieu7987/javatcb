@@ -125,16 +125,16 @@ public class TCBController {
 
         byte[] signature_encrypted = Base64.getDecoder().decode(update_status.Sgntr1);
         PublicKey pk = JavaSecutityEncrypt_V2.getPulicKey("tcb_mahoa.cer");
-//        String signature_decrypted = new String(JavaSecutityEncrypt_V2.decrypt_AES_RSA(signature_encrypted, pk));
-//        String status = "RCCF";
-//        String code = "000";
-//        if (signature_decrypted == sSource_hashed) {
-//            status = "RCCF";
-//            code = "000";
-//        } else {
-//            status = "RCER";
-//            code = "001";
-//        }
+        String signature_decrypted = new String(JavaSecutityEncrypt_V2.decrypt_AES_RSA(signature_encrypted, pk));
+        String status = "RCCF";
+        String code = "000";
+        if (signature_decrypted == sSource_hashed) {
+            status = "RCCF";
+            code = "000";
+        } else {
+            status = "RCER";
+            code = "001";
+        }
         return "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">"
                 + "<soapenv:Header/>"
                 + "<soapenv:Body>"
@@ -147,17 +147,17 @@ public class TCBController {
                 + "<v1:Desc/>"
                 + "<v1:HeaderHashStr/>"
                 + "<v1:Sgntr>H2H Payment ACH Intergration v1.0"
-                + "53/60\n"
-                + "<v1:Sgntr1/>\n"
-                + "<v1:Sgntr2/>\n"
-                + "</v1:Sgntr>\n"
-                + "</v1:RspnInf>\n"
-                + "<v1:RspnSts>\n"
-                + "<v1:Sts>RCCF</v1:Sts>\n"
-                + "<v1:AddtlStsRsnInf>000</v1:AddtlStsRsnInf>\n"
-                + "</v1:RspnSts>\n"
-                + "</v1:UpdateStatusRspn>\n"
-                + "</soapenv:Body>\n"
+                + "53/60"
+                + "<v1:Sgntr1/>"
+                + "<v1:Sgntr2/>"
+                + "</v1:Sgntr>"
+                + "</v1:RspnInf>"
+                + "<v1:RspnSts>"
+                + "<v1:Sts>RCCF</v1:Sts>"
+                + "<v1:AddtlStsRsnInf>000</v1:AddtlStsRsnInf>"
+                + "</v1:RspnSts>"
+                + "</v1:UpdateStatusRspn>"
+                + "</soapenv:Body>"
                 + "</soapenv:Envelope>";
 
     }
