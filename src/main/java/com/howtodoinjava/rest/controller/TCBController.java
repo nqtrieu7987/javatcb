@@ -66,63 +66,57 @@ public class TCBController {
 
     String basic_token = "c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx";
     
-    @PostMapping(path = "/pushstatus", consumes = {MediaType.APPLICATION_JSON_VALUE,
-        MediaType.APPLICATION_XML_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE,
-        MediaType.APPLICATION_XML_VALUE})
+    @PostMapping(path = "/pushstatus")
     @ResponseBody
     public String pushstatus(@RequestBody String Xml) {
         GlobalVariables.logger.info("updatestatus------"+Xml);
  
-        // return "<soapenv:Envelope"+
-        // "xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">"+
-        // "<soapenv:Header"+
-        // "xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\"/>"+
-        // "<soapenv:Body"+
-        // "xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"+
-        // "<PushStatusRs"+
-        // "xmlns=\"http://app.linkcard.tcb.com/\">"+
-        // "<RspnInf>"+
-        // "<Id>stg11213128755dcb6ba88d0847</Id>"+
-        // "<TxId>1234567890</TxId>"+
-        // "<CreDtTm>2020-12-04T15:06:45.469+07:00</CreDtTm>"+
-        // "<Desc>Trans sale"+
-        // "response</Desc>"+
-        // "<Sgntr>NO"+
-        // "SIGNATURE</Sgntr>"+
-        // "</RspnInf>"+
-        // "<Envt>"+
-        // "<TrgtPty>"+
-        // "<Nm>CARD</Nm>"+
-        // "</TrgtPty>"+
-        // "<SrcPty>"+
-        // "<Nm>TCB</Nm>"+
-        // "</SrcPty>"+
-        // "<Rqstr>"+
-        // "<Nm>Response from TCB"+
-        // "system</Nm>"+
-        // "</Rqstr>"+
-        // "</Envt>"+
-        // "<RspnSts>"+
-        // "<Status>0</Status>"+
-        // "<ErrCd>APP-001</ErrCd>"+
-        // "<ErrMsg>Da ghi nhan</ErrMsg>"+
-        // "</RspnSts>"+
-        // "</PushStatusRs>"+
-        // "</soapenv:Body>";
-        Gson gson = new Gson();
-        return gson.toJson(GetPUSHSTATUS(Xml));
+         return "<soapenv:Envelope"+
+         "xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">"+
+         "<soapenv:Header"+
+         "xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\"/>"+
+         "<soapenv:Body"+
+         "xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"+
+         "<PushStatusRs"+
+         "xmlns=\"http://app.linkcard.tcb.com/\">"+
+         "<RspnInf>"+
+         "<Id>stg11213128755dcb6ba88d0847</Id>"+
+         "<TxId>1234567890</TxId>"+
+         "<CreDtTm>2020-12-04T15:06:45.469+07:00</CreDtTm>"+
+         "<Desc>Trans sale"+
+         "response</Desc>"+
+         "<Sgntr>NO"+
+         "SIGNATURE</Sgntr>"+
+         "</RspnInf>"+
+         "<Envt>"+
+         "<TrgtPty>"+
+         "<Nm>CARD</Nm>"+
+         "</TrgtPty>"+
+         "<SrcPty>"+
+         "<Nm>TCB</Nm>"+
+         "</SrcPty>"+
+         "<Rqstr>"+
+         "<Nm>Response from TCB"+
+         "system</Nm>"+
+         "</Rqstr>"+
+         "</Envt>"+
+         "<RspnSts>"+
+         "<Status>0</Status>"+
+         "<ErrCd>APP-001</ErrCd>"+
+         "<ErrMsg>Da ghi nhan</ErrMsg>"+
+         "</RspnSts>"+
+         "</PushStatusRs>"+
+         "</soapenv:Body>"; 
     }
-
-    @PostMapping(path = "/updatestatus", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @PostMapping(path = "/updatestatus")
     @ResponseBody
     public String updatestatus(@RequestBody String xml) {
         GlobalVariables.logger.info("updatestatus------"+xml);
 
         UPDATESTATUS update_status = GetUPDATESTATUS(xml);
         String sSource = "UpdateStatus" + update_status.PartID + update_status.Channel + update_status.TxnStsRemark + update_status.TxnSts;
-       
-        if (JavaSignSHA256.verifySign_SHA256(sSource, 'tcb_mahoa.cer', update_status.Sgntr1)) {
+       String status="",code="";
+        if (JavaSignSHA256.verifySign_SHA256(sSource, "tcb_mahoa.cer", update_status.Sgntr1)) {
             status = "RCCF";
             code = "000";
         } else {
@@ -414,8 +408,7 @@ public class TCBController {
         }
     }
     
-    @GetMapping(path = "/createactiveurl", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/createactiveurl")
     @ResponseBody
     public String CreateActiveUrlRq(@RequestParam("CustomerName") String CustomerName,
             @RequestParam("MobileNumber") String MobileNumber) {
@@ -541,8 +534,8 @@ public class TCBController {
         return m;
     }
 
-    @GetMapping(path = "/deletecardlink", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/deletecardlink"
+        )
     @ResponseBody
     public String DeleteCardLink(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo) {
@@ -584,7 +577,7 @@ public class TCBController {
         post.setHeader("SOAPAction", "DeleteCardToken");
         try {
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
@@ -615,8 +608,8 @@ public class TCBController {
         return m;
     }
 
-    @GetMapping(path = "/verifyotp", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/verifyotp"
+        )
     @ResponseBody
     public String VerifyOTP(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo, @RequestParam("Otp") String Otp,
@@ -658,7 +651,7 @@ public class TCBController {
         post.setHeader("SOAPAction", "VerifyOTP");
         try {
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
@@ -764,8 +757,8 @@ public class TCBController {
 
     }
 
-    @GetMapping(path = "/cardtokentrxntopup", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/cardtokentrxntopup"
+        )
     @ResponseBody
     public String CardTokenTrxnTopuP(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo, @RequestParam("TrxnAmount") String TrxnAmount,
@@ -813,7 +806,7 @@ public class TCBController {
         post.setHeader("SOAPAction", "CardTokenTrxnTopup");
         try {
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
@@ -918,8 +911,8 @@ public class TCBController {
 
     }
 
-    @GetMapping(path = "/cardtokenTrxnsale", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/cardtokenTrxnsale"
+        )
     @ResponseBody
     public String CardTokenTrxnSale(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo, @RequestParam("TrxnAmount") String TrxnAmount,
@@ -968,7 +961,7 @@ public class TCBController {
         post.setHeader("SOAPAction", "CardTokenTrxnSale");
         try {
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
@@ -1015,8 +1008,8 @@ public class TCBController {
         return m;
     }
 
-    @GetMapping(path = "/cardtokentrxnwithdraw", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/cardtokentrxnwithdraw"
+        )
     @ResponseBody
     public String CardTokenTrxnWithdraw(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo, @RequestParam("TrxnAmount") String TrxnAmount,
@@ -1064,7 +1057,7 @@ public class TCBController {
         post.setHeader("SOAPAction", "CardTokenTrxnWithdraw");
         try {
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
@@ -1111,8 +1104,8 @@ public class TCBController {
         return m;
     }
 
-    @GetMapping(path = "/cardtokentrxnrefund", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/cardtokentrxnrefund"
+        )
     @ResponseBody
     public String CardTokenTrxnRefund(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo, @RequestParam("TrxnAmount") String TrxnAmount,
@@ -1160,7 +1153,7 @@ public class TCBController {
         post.setHeader("SOAPAction", "CardTokenTrxnRefund");
         try {
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
@@ -1209,8 +1202,8 @@ public class TCBController {
     }
 
     /////////////////////////////
-    @GetMapping(path = "/fundtransfer", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/fundtransfer"
+        )
     @ResponseBody
     public String FundTransfer(
             @RequestParam("Description") String Description, 
@@ -1306,7 +1299,8 @@ public class TCBController {
         post.setHeader("Authorization","Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
         try {
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info("postdata----"+ReqInf);
+
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
@@ -1338,8 +1332,8 @@ public class TCBController {
     }
     /////////////////////////////
 
-    @GetMapping(path = "/accountinfo", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/accountinfo"
+        )
     @ResponseBody
     public String AccountInfo(@RequestParam("ClientTerminalSeqNum") String ClientTerminalSeqNum,
             @RequestParam("Name") String Name, @RequestParam("Org") String CustOrg, 
@@ -1401,7 +1395,7 @@ public class TCBController {
         post.setHeader("Authorization","Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
         try {
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
@@ -1502,8 +1496,7 @@ public class TCBController {
     }
 
     /////////////////////////////
-    @GetMapping(path = "/inqlistbankinfo", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/inqlistbankinfo" )
     @ResponseBody
     public String InqListBankInfo() {
         Gson gson = new Gson(); 
@@ -1554,18 +1547,16 @@ public class TCBController {
 		// set up a TrustManager that trusts everything
 		sslContext.init(null, new TrustManager[] { new X509TrustManager() {
 		            public X509Certificate[] getAcceptedIssuers() {
-		                    System.out.println("getAcceptedIssuers =============");
+		                  
 		                    return null;
 		            }
 
 		            public void checkClientTrusted(X509Certificate[] certs,
-		                            String authType) {
-		                    System.out.println("checkClientTrusted =============");
+		                            String authType) { 
 		            }
 
 		            public void checkServerTrusted(X509Certificate[] certs,
-		                            String authType) {
-		                    System.out.println("checkServerTrusted =============");
+		                            String authType) { 
 		            }
 		} }, new SecureRandom());
  
@@ -1589,7 +1580,7 @@ public class TCBController {
         post.setHeader("SOAPAction", "InqListBankInfo");
         post.setHeader("Authorization","Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
