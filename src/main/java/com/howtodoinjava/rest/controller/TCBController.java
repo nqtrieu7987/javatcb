@@ -9,18 +9,20 @@ import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+import javax.xml.bind.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.commons.httpclient.HttpClient;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ClientConnectionManager;
@@ -41,6 +43,7 @@ import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,6 +51,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import com.google.gson.Gson;
@@ -55,8 +59,6 @@ import com.vnm.erp.cover.GlobalVariables;
 import com.vnm.erp.cover.JavaSecutityEncrypt_V2;
 import com.vnm.erp.cover.JavaSignSHA256;
 import com.vnm.erp.cover.JavaSignSHA256_V2;
-
-import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping(path = "/tcb")
@@ -69,8 +71,8 @@ public class TCBController {
         MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
     public String pushstatus(@RequestBody String Xml) {
-        GlobalVariables.logger.info(Xml);
-
+        GlobalVariables.logger.info("updatestatus------"+Xml);
+ 
         // return "<soapenv:Envelope"+
         // "xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">"+
         // "<soapenv:Header"+
@@ -115,7 +117,7 @@ public class TCBController {
         MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
     public String updatestatus(@RequestBody String xml) {
-        GlobalVariables.logger.info(xml);
+        GlobalVariables.logger.info("updatestatus------"+xml);
 
         UPDATESTATUS update_status = GetUPDATESTATUS(xml);
         String sSource = "UpdateStatus" + update_status.PartID + update_status.Channel + update_status.TxnStsRemark + update_status.TxnSts;
@@ -1234,7 +1236,7 @@ public class TCBController {
     ) {
         Gson gson = new Gson();
         UUID uuid = UUID.randomUUID();
-        String TxId = "MBC" + uuid.toString();
+        String TxId = ("MBC" + uuid.toString()).substring(0,19);
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
 
         return gson.toJson(PostFundTransfer(Description, uuid, TxId, payment_type, CreDtTm.format(new Date()), customerID, toAcct_Citad,
@@ -1271,10 +1273,10 @@ public class TCBController {
         signature2 = signature1;
 
         String TxTp = "";
-        if (citad == "") {
+        if (citad.equals("")) {
             citad = "01310001"; // "Internal"
         }
-        if (citad == "01310001") {
+        if (citad.equals("01310001")) {
             TxTp = "DOMESTIC"; // ATM
         }
         String ReqInf = "<ReqInf xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\">" + "<TxTp>" + TxTp
@@ -1283,7 +1285,7 @@ public class TCBController {
                 + "</FrAcct>" + "<ToAcct>" + "<AcctId>" + toAccId + "</AcctId>" + "<AcctTitl>" + toAccTitl
                 + "</AcctTitl>" + "<FIData>" + "<CITAD>" + citad + "</CITAD>" + "</FIData>" + "<PtyData>" + "<Tp/>"
                 + "<Val>" + toAccTitl + "</Val>" + "<Desc/>" + "</PtyData>" + "</ToAcct>" + "</ReqInf>";
-
+        GlobalVariables.logger.info("ReqInf"+ReqInf);
         ReqInfEncrypted = JavaSecutityEncrypt_V2.encrypt_AES256(ReqInf, "tcb_mahoa.cer");
         String postdata = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v1=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"
                 + "   <soapenv:Header/>" + "   <soapenv:Body>"
@@ -1295,7 +1297,7 @@ public class TCBController {
                 + "</v1:Sgntr1>" + "               <v1:Sgntr2 user=\"" + customerID + "2\">" + signature2
                 + "</v1:Sgntr2>" + "            </v1:Sgntr>" + "         </v1:ReqGnlInf>" + "         <v1:Envt>"
                 + "            <v1:SrcPty>" + "               <v1:Nm>" + customerID + "</v1:Nm>"
-                + "            </v1:SrcPty>" + "            <v1:TrgtPty>" + "               <v1:Nm>TCB</v1:Nm>"
+                + "            </v1:SrcPty>" + "            <v1:TrgtPty>" + "               <v1:Nm>H2H</v1:Nm>"
                 + "            </v1:TrgtPty>" + "            <v1:Rqstr>" + "               <v1:Nm>" + customerID
                 + "</v1:Nm>" + "            </v1:Rqstr>" + "            <v1:TrgtPty/>" + "         </v1:Envt>"
                 + "         <v1:ReqInf>" + ReqInfEncrypted + "</v1:ReqInf>" + "      </v1:XferReq>"
@@ -1512,14 +1514,13 @@ public class TCBController {
     @GetMapping(path = "/inqlistbankinfo", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
         MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
-    public String InqListBankInfo(@RequestParam("CustomerID") String CustomerID) {
-        Gson gson = new Gson();
-        System.out.println("223ww23");
+    public String InqListBankInfo() {
+        Gson gson = new Gson(); 
 
-        return gson.toJson(GetInqListBankInfo(CustomerID));
+        return gson.toJson(GetInqListBankInfo());
     }
 
-    public String PostInqListBankInfo(String CustomerID) {
+    public String PostInqListBankInfo() {
     	String sign=encriptFundTransfer("","","","");
         UUID uuid = UUID.randomUUID(); 
         String TxId = "MBC" + uuid.toString();
@@ -1532,7 +1533,7 @@ public class TCBController {
  "        <v1:InqBnkInfReq xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"+
  "            <v1:ReqGnlInf>"+
  "                <v1:Id>"+uuid.toString()+"</v1:Id>"+
- "                <v1:TxId>77771</v1:TxId>"+
+ "                <v1:TxId>"+TxId+"</v1:TxId>"+
  "                <v1:CreDtTm>"+CreDtTm.format(new Date())+"</v1:CreDtTm>"+
  "                <v1:Sgntr>"+sign+"</v1:Sgntr>"+
  "            </v1:ReqGnlInf>"+
@@ -1550,18 +1551,15 @@ public class TCBController {
  "        </v1:InqBnkInfReq>"+
  "    </soapenv:Body>"+
  "</soapenv:Envelope>";
-        System.out.println("22311123222ww23");
-
+ 
         StringEntity xmlEntity;
         HttpResponse response;
         String result = "";
        
-        System.out.println("223222ww23");
-
+ 
         try {
         	SSLContext sslContext = SSLContext.getInstance("SSL");
-            System.out.println("22322222ww23");
-
+ 
 		// set up a TrustManager that trusts everything
 		sslContext.init(null, new TrustManager[] { new X509TrustManager() {
 		            public X509Certificate[] getAcceptedIssuers() {
@@ -1579,26 +1577,22 @@ public class TCBController {
 		                    System.out.println("checkServerTrusted =============");
 		            }
 		} }, new SecureRandom());
-        System.out.println("22322aq2wsssssssssssssssssssssssssssssssssssssssssssssssssw23");
-
+ 
 		@SuppressWarnings("deprecation")
 		SSLSocketFactory sf = new SSLSocketFactory(sslContext);
 		Scheme httpsScheme = new Scheme("https", 446, sf);
 		SchemeRegistry schemeRegistry = new SchemeRegistry();
 		schemeRegistry.register(httpsScheme);
-        System.out.println("223222ww222222222222222222222222222222222223");
-
+ 
 		// apache HttpClient version >4.2 should use BasicClientConnectionManager
 		ClientConnectionManager cm = new SingleClientConnManager(schemeRegistry);
 		DefaultHttpClient httpClient = new DefaultHttpClient(cm);
 		HttpParams params = httpClient.getParams();
-        System.out.println("22322212hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhww23");
-
+ 
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
         HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/Partner2TCB/MOBICAST_payment_v3");
-        System.out.println("22323");
-
+ 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive"); 
         post.setHeader("SOAPAction", "InqListBankInfo");
@@ -1617,38 +1611,47 @@ public class TCBController {
         return result;
     }
 
-    BankAccountInfo GetInqListBankInfo(String CustomerID) {
-        System.out.println("2232qwq2211ww23");
-
-        String tibcoxml = PostInqListBankInfo(CustomerID);
-        BankAccountInfo m = new BankAccountInfo();
-        System.out.println("ok3");
-
+    List<BankAccountInfo> GetInqListBankInfo() {
+ 
+        String tibcoxml = PostInqListBankInfo();
+        List<BankAccountInfo> bankss = new ArrayList<TCBController.BankAccountInfo>();
+        
         DocumentBuilder db;
         try {
             db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(tibcoxml));
             Document doc = db.parse(is);
-            Node CITAD = doc.getElementsByTagName("CITAD").item(0);
-            Node BkCd = doc.getElementsByTagName("BkCd").item(0);
-            Node BkNm = doc.getElementsByTagName("BkCd").item(0);
-            Node BrnchNm = doc.getElementsByTagName("BkCd").item(0);
-            Node StatPrvc = doc.getElementsByTagName("BkCd").item(0);
-            Node ActvSts = doc.getElementsByTagName("BkCd").item(0);
-            Node IsCentralizedBank = doc.getElementsByTagName("BkCd").item(0);
-            m.setCITAD(CITAD.getTextContent());
-            m.setBkCd(BkCd.getTextContent());
-            m.setBkNm(BkNm.getTextContent());
-            m.setBrnchNm(BrnchNm.getTextContent());
-            m.setStatPrvc(StatPrvc.getTextContent());
-            m.setActvSts(ActvSts.getTextContent());
-            m.setIsCentralizedBank(IsCentralizedBank.getTextContent());
+            NodeList allbank=doc.getElementsByTagName("v1:BkInfRcrd");
+            for (int i = 0; i < allbank.getLength(); i++) {
+            	NodeList banks=allbank.item(i).getChildNodes();
+            	BankAccountInfo bank=new BankAccountInfo();
+            	for (int j = 0; j < banks.getLength(); j++) {
+            		
+            		switch ( banks.item(j).getNodeName()){
+            		case "v1:CITAD":
+            			bank.setCITAD(banks.item(j).getTextContent());
+            		case "v1:BkCd":
+            			bank.setBkCd(banks.item(j).getTextContent());
+            		case "v1:BkNm":
+            			bank.setBkNm(banks.item(j).getTextContent());
+            		case "v1:BrnchNm":
+            			bank.setBrnchNm(banks.item(j).getTextContent());
+            		case "v1:StatPrvc":
+            			bank.setStatPrvc(banks.item(j).getTextContent());
+            		case "v1:ActvSts":
+            			bank.setActvSts(banks.item(j).getTextContent());
+            		case "v1:IsCentralizedBank":
+            			bank.setIsCentralizedBank(banks.item(j).getTextContent());
+            		};
+				}
+            	bankss.add(bank);
+			} 
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return m;
+        return bankss;
     }
 
     /////////////////
