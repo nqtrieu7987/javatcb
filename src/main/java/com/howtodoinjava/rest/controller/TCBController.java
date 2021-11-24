@@ -455,7 +455,7 @@ public class TCBController {
                 + "               <v1:Sgntr1>" + CreateActiveUrl(TxId, CustomerName, MobileNumber) + "</v1:Sgntr1>"
                 + "            </v1:Sgntr>" + "         </v1:ReqGnlInf>" + "         <v1:Envt>"
                 + "            <v1:TrgtPty>" + "               <v1:Nm>TCB</v1:Nm>" + "            </v1:TrgtPty>"
-                + "            <v1:SrcPty>" + "               <v1:Nm>MSBC</v1:Nm>" + "            </v1:SrcPty>"
+                + "            <v1:SrcPty>" + "               <v1:Nm>MOBICAST</v1:Nm>" + "            </v1:SrcPty>"
                 + "            <v1:Rqstr>" + "               <v1:Nm>Call from MASAN system</v1:Nm>"
                 + "            </v1:Rqstr>" + "         </v1:Envt>" + "         <v1:ReqInf>"
                 + "            <v1:CustomerId>+84" + MobileNumber.substring(1) + "</v1:CustomerId>"
@@ -501,6 +501,8 @@ public class TCBController {
             post.setHeader("Content-Type", "text/xml;charset=UTF-8");
             post.setHeader("Connection", "Keep-Alive");
             post.setHeader("SOAPAction", "CreateActiveUrl");
+            post.setHeader("Authorization", "Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
+
             xmlEntity = new StringEntity(postdata);
             GlobalVariables.logger.info("CreateActiveUrl request" + postdata);
             post.setEntity(xmlEntity);
@@ -1723,10 +1725,9 @@ public class TCBController {
 
         String RoutingRule = "CreateActiveUrl";
         String TrgtPty = "TCB";
-        String SrcPty = "MBC";
+        String SrcPty = "MOBICAST";
         String CustomerID = "+84" + MobileNumber.substring(1);
-        return JavaSignSHA256.encryptWithPublicKeyTCB(
-                TxId + RoutingRule + TrgtPty + SrcPty + CustomerID + CustomerName + MobileNumber);
+        return JavaSignSHA256.signData_SHA256( TxId + RoutingRule + TrgtPty + SrcPty + CustomerID + CustomerName + MobileNumber);
     }
 
     public static String otherApi(String RoutingRule, String CardInfo, String TokenInfo, String TrxnAmount, String Otp, String OtpTranId) {

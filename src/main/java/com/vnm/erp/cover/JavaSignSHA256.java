@@ -38,7 +38,7 @@ public class JavaSignSHA256 {
 
             String publicPath = "tcb_mahoa.cer";
 
-            String sSource = "AcctInqef4c7bc9-5a9d-43e1-851c-4a80392c7772VINFASTOWNER19144556699669";
+            String sSource = "AcctInqef4";
             String signStr = signData_SHA256(sSource);
             System.out.println(">>>>>>>>>> Sign: " + signStr);
 
@@ -64,12 +64,13 @@ public class JavaSignSHA256 {
     }
 
     public static String signData_SHA256(Object sSource) {
+    	GlobalVariables.logger.info("SIGN --"+sSource);
         byte[] bSource = (byte[]) null;
         byte[] bSourceSha256 = (byte[]) null;
         byte[] bSign = (byte[]) null;
         String bSignBase64 = null;
         try {
-            String privateKeyPath = "MBCpay.pfx";
+            String privateKeyPath = "MBCpay2048.pfx";
             String keyStorePass = "12345678";
             String keyStoreType = "PKCS12";
             String alias = "le-7f0cf49a-2207-4799-94b5-35f5649631cc";
