@@ -22,6 +22,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -65,11 +66,11 @@ public class JavaSignSHA256_V2 {
         byte[] bSign = (byte[]) null;
         String bSignBase64 = null;
         try {
-            String privateKeyPath = "d:\\TCB\\other\\Singnature\\keystore\\KeyTestGrap\\mobivi.pfx";
-            String keyStorePass = "1";
-            String keyStoreType = "PKCS12";
-            String alias = "le-7f0cf49a-2207-4799-94b5-35f5649631cc";
-            String keyPass = "1";
+	    	  String privateKeyPath = "MBCpay.pfx";
+	          String keyStorePass = "12345678";
+	          String keyStoreType = "PKCS12";
+	          String alias = "le-7f0cf49a-2207-4799-94b5-35f5649631cc";
+	          String keyPass = "12345678";
             PrivateKey privateKey = getPrivateKey(privateKeyPath, keyStorePass, keyStoreType, alias, keyPass);
             bSource = sSource.toString().getBytes("UTF-8");
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
