@@ -496,7 +496,7 @@ public class TCBController {
             // apache HttpClient version >4.2 should use BasicClientConnectionManager
             ClientConnectionManager cm = new SingleClientConnManager(schemeRegistry);
             DefaultHttpClient httpClient = new DefaultHttpClient(cm);
-            HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
+            HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/MOBICAST_ewallet_v1");
 
             post.setHeader("Content-Type", "text/xml;charset=UTF-8");
             post.setHeader("Connection", "Keep-Alive");
@@ -598,7 +598,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/MOBICAST_ewallet_v1");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -673,7 +673,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/MOBICAST_ewallet_v1");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -829,7 +829,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/MOBICAST_ewallet_v1");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -985,7 +985,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/MOBICAST_ewallet_v1");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -1082,7 +1082,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/MOBICAST_ewallet_v1");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -1179,7 +1179,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/MOBICAST_ewallet_v1");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
