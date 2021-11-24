@@ -112,6 +112,33 @@ public class JavaSignSHA256 {
 
         return bVerify;
     }
+    public static boolean verifySign_SHA256_2(Object sSource, String _path, Object sSign) {
+        byte[] bSign = (byte[]) null;
+        byte[] bSource = (byte[]) null;
+        byte[] bSourceSha256 = (byte[]) null;
+        boolean bVerify = false;
+
+        try {
+            PublicKey publicKey = getPulicKey(_path);
+            bSource = sSource.toString().getBytes("UTF-8");
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            bSourceSha256 = digest.digest(bSource);
+            
+            bSign = Base64.getDecoder().decode(sSign.toString());
+            byte[] decrypted_bSign = JavaSignSHA256.decrypt2(bSign, publicKey);
+            //System.out.println(">>>>>>>>>>signStr1: " + bSign.toString());
+            String s1 = new String(bSourceSha256);
+            String s2 = new String(decrypted_bSign);
+            
+            GlobalVariables.logger.info("S1:"+s1);
+            GlobalVariables.logger.info("S1:"+s2);
+            return (s1).equals(s2);
+        } catch (Exception var9) {
+            GlobalVariables.logger.info("S1:"+var9.getMessage());
+        }
+
+        return bVerify;
+    }
 
     public static String encryptWithPublicKeyTCB(String _content) {
         String _pathPublic = "tcb_mahoa.cer";
@@ -511,6 +538,16 @@ public class JavaSignSHA256 {
     }
 
     public static byte[] decrypt(byte[] enSecretKey, PrivateKey privateKey) {
+        try {
+            Cipher rsaCipher = Cipher.getInstance("RSA");
+            rsaCipher.init(2, privateKey);
+            byte[] decodedKeyBytes = rsaCipher.doFinal(enSecretKey);
+            return decodedKeyBytes;
+        } catch (Exception var4) {
+            return null;
+        }
+    }
+    public static byte[] decrypt2(byte[] enSecretKey, PublicKey privateKey) {
         try {
             Cipher rsaCipher = Cipher.getInstance("RSA");
             rsaCipher.init(2, privateKey);

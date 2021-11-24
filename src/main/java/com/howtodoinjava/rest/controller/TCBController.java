@@ -65,66 +65,70 @@ import com.vnm.erp.cover.JavaSignSHA256_V2;
 public class TCBController {
 
     String basic_token = "c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx";
-    
+
     @PostMapping(path = "/pushstatus")
     @ResponseBody
     public String pushstatus(@RequestBody String Xml) {
-        GlobalVariables.logger.info("updatestatus------"+Xml);
- 
-         return "<soapenv:Envelope"+
-         "xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">"+
-         "<soapenv:Header"+
-         "xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\"/>"+
-         "<soapenv:Body"+
-         "xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"+
-         "<PushStatusRs"+
-         "xmlns=\"http://app.linkcard.tcb.com/\">"+
-         "<RspnInf>"+
-         "<Id>stg11213128755dcb6ba88d0847</Id>"+
-         "<TxId>1234567890</TxId>"+
-         "<CreDtTm>2020-12-04T15:06:45.469+07:00</CreDtTm>"+
-         "<Desc>Trans sale"+
-         "response</Desc>"+
-         "<Sgntr>NO"+
-         "SIGNATURE</Sgntr>"+
-         "</RspnInf>"+
-         "<Envt>"+
-         "<TrgtPty>"+
-         "<Nm>CARD</Nm>"+
-         "</TrgtPty>"+
-         "<SrcPty>"+
-         "<Nm>TCB</Nm>"+
-         "</SrcPty>"+
-         "<Rqstr>"+
-         "<Nm>Response from TCB"+
-         "system</Nm>"+
-         "</Rqstr>"+
-         "</Envt>"+
-         "<RspnSts>"+
-         "<Status>0</Status>"+
-         "<ErrCd>APP-001</ErrCd>"+
-         "<ErrMsg>Da ghi nhan</ErrMsg>"+
-         "</RspnSts>"+
-         "</PushStatusRs>"+
-         "</soapenv:Body>"; 
+        GlobalVariables.logger.info("updatestatus------" + Xml);
+
+        return "<soapenv:Envelope"
+                + "xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">"
+                + "<soapenv:Header"
+                + "xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\"/>"
+                + "<soapenv:Body"
+                + "xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"
+                + "<PushStatusRs"
+                + "xmlns=\"http://app.linkcard.tcb.com/\">"
+                + "<RspnInf>"
+                + "<Id>stg11213128755dcb6ba88d0847</Id>"
+                + "<TxId>1234567890</TxId>"
+                + "<CreDtTm>2020-12-04T15:06:45.469+07:00</CreDtTm>"
+                + "<Desc>Trans sale"
+                + "response</Desc>"
+                + "<Sgntr>NO"
+                + "SIGNATURE</Sgntr>"
+                + "</RspnInf>"
+                + "<Envt>"
+                + "<TrgtPty>"
+                + "<Nm>CARD</Nm>"
+                + "</TrgtPty>"
+                + "<SrcPty>"
+                + "<Nm>TCB</Nm>"
+                + "</SrcPty>"
+                + "<Rqstr>"
+                + "<Nm>Response from TCB"
+                + "system</Nm>"
+                + "</Rqstr>"
+                + "</Envt>"
+                + "<RspnSts>"
+                + "<Status>0</Status>"
+                + "<ErrCd>APP-001</ErrCd>"
+                + "<ErrMsg>Da ghi nhan</ErrMsg>"
+                + "</RspnSts>"
+                + "</PushStatusRs>"
+                + "</soapenv:Body>";
     }
-   
+
     @PostMapping(path = "/updatestatus")
     @ResponseBody
     public String updatestatus(@RequestBody String xml) {
-        GlobalVariables.logger.info("updatestatus------"+xml);
+        GlobalVariables.logger.info("updatestatus------" + xml);
 
         UPDATESTATUS update_status = GetUPDATESTATUS(xml);
         String sSource = "UpdateStatus" + update_status.PartID + update_status.Channel + update_status.TxnStsRemark + update_status.TxnSts;
-       String status="",code="";
-        if (JavaSignSHA256.verifySign_SHA256(sSource, "tcb_mahoa.cer", update_status.Sgntr1)) {
+        GlobalVariables.logger.info("sSource:"+sSource);
+        String status = "", code = "";
+        if (JavaSignSHA256.verifySign_SHA256_2(sSource, "tcb_mahoa.cer", update_status.Sgntr1)) {
             status = "RCCF";
             code = "000";
+            
+            GlobalVariables.logger.info("updatestatus verified.");
         } else {
             status = "RCER";
             code = "001";
+            GlobalVariables.logger.info("updatestatus not verified.");
         }
-        String xml_resp =  "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">"
+        String xml_resp = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">"
                 + "<soapenv:Header/>"
                 + "<soapenv:Body>"
                 + "<v1:UpdateStatusRspn"
@@ -142,37 +146,35 @@ public class TCBController {
                 + "</v1:Sgntr>"
                 + "</v1:RspnInf>"
                 + "<v1:RspnSts>"
-                + "<v1:Sts>"+status+"</v1:Sts>"
-                + "<v1:AddtlStsRsnInf>"+code+"</v1:AddtlStsRsnInf>"
+                + "<v1:Sts>" + status + "</v1:Sts>"
+                + "<v1:AddtlStsRsnInf>" + code + "</v1:AddtlStsRsnInf>"
                 + "</v1:RspnSts>"
                 + "</v1:UpdateStatusRspn>"
                 + "</soapenv:Body>"
                 + "</soapenv:Envelope>";
-    
+
         return xml_resp;
     }
-    private static Document convertStringToXMLDocument(String xmlString) 
-    {
+
+    private static Document convertStringToXMLDocument(String xmlString) {
         //Parser that produces DOM object trees from XML content
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-         
+
         //API to obtain DOM Document instance
         DocumentBuilder builder = null;
-        try
-        {
+        try {
             //Create DocumentBuilder with default configuration
             builder = factory.newDocumentBuilder();
-             
+
             //Parse the content to Document object
             Document doc = builder.parse(new InputSource(new StringReader(xmlString)));
             return doc;
-        } 
-        catch (Exception e) 
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
+
     UPDATESTATUS GetUPDATESTATUS(String Xml) {
 
         UPDATESTATUS m = new UPDATESTATUS();
@@ -430,7 +432,7 @@ public class TCBController {
             TokenInfo = tokenInfo;
         }
     }
-    
+
     @GetMapping(path = "/createactiveurl")
     @ResponseBody
     public String CreateActiveUrlRq(@RequestParam("CustomerName") String CustomerName,
@@ -464,54 +466,56 @@ public class TCBController {
         HttpResponse response;
         String result = "";
         try {
- 
-        	SSLContext sslContext = SSLContext.getInstance("SSL");
 
-			// set up a TrustManager that trusts everything
-			sslContext.init(null, new TrustManager[] { new X509TrustManager() {
-			            public X509Certificate[] getAcceptedIssuers() {
-			                    System.out.println("getAcceptedIssuers =============");
-			                    return null;
-			            }
+            SSLContext sslContext = SSLContext.getInstance("SSL");
 
-			            public void checkClientTrusted(X509Certificate[] certs,
-			                            String authType) {
-			                    System.out.println("checkClientTrusted =============");
-			            }
+            // set up a TrustManager that trusts everything
+            sslContext.init(null, new TrustManager[]{new X509TrustManager() {
+                public X509Certificate[] getAcceptedIssuers() {
+                    System.out.println("getAcceptedIssuers =============");
+                    return null;
+                }
 
-			            public void checkServerTrusted(X509Certificate[] certs,
-			                            String authType) {
-			                    System.out.println("checkServerTrusted =============");
-			            }
-			} }, new SecureRandom());
+                public void checkClientTrusted(X509Certificate[] certs,
+                        String authType) {
+                    System.out.println("checkClientTrusted =============");
+                }
 
-			@SuppressWarnings("deprecation")
-			SSLSocketFactory sf = new SSLSocketFactory(sslContext);
-			Scheme httpsScheme = new Scheme("https", 446, sf);
-			SchemeRegistry schemeRegistry = new SchemeRegistry();
-			schemeRegistry.register(httpsScheme);
+                public void checkServerTrusted(X509Certificate[] certs,
+                        String authType) {
+                    System.out.println("checkServerTrusted =============");
+                }
+            }}, new SecureRandom());
 
-			// apache HttpClient version >4.2 should use BasicClientConnectionManager
-			ClientConnectionManager cm = new SingleClientConnManager(schemeRegistry);
-			DefaultHttpClient httpClient = new DefaultHttpClient(cm);
-            HttpPost post = new HttpPost("https://api.techcombank.com.vn:446/services/bank/collection/CardToken/v1") ;
+            @SuppressWarnings("deprecation")
+            SSLSocketFactory sf = new SSLSocketFactory(sslContext);
+            Scheme httpsScheme = new Scheme("https", 446, sf);
+            SchemeRegistry schemeRegistry = new SchemeRegistry();
+            schemeRegistry.register(httpsScheme);
+
+            // apache HttpClient version >4.2 should use BasicClientConnectionManager
+            ClientConnectionManager cm = new SingleClientConnManager(schemeRegistry);
+            DefaultHttpClient httpClient = new DefaultHttpClient(cm);
+            HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
 
             post.setHeader("Content-Type", "text/xml;charset=UTF-8");
             post.setHeader("Connection", "Keep-Alive");
             post.setHeader("SOAPAction", "CreateActiveUrl");
             xmlEntity = new StringEntity(postdata);
-            GlobalVariables.logger.info("CreateActiveUrl request"+postdata);
+            GlobalVariables.logger.info("CreateActiveUrl request" + postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
-            GlobalVariables.logger.info("CreateActiveUrl response"+response.getStatusLine().getStatusCode());
+            GlobalVariables.logger.info("CreateActiveUrl response" + response.getStatusLine().getStatusCode());
             result = EntityUtils.toString(response.getEntity());
-            GlobalVariables.logger.info("CreateActiveUrl Response"+result);post.releaseConnection();
+            GlobalVariables.logger.info("CreateActiveUrl Response" + result);
+            post.releaseConnection();
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;
     }
+
     private static CloseableHttpClient createAcceptSelfSignedCertificateClient()
             throws KeyManagementException, NoSuchAlgorithmException, KeyStoreException {
 
@@ -524,17 +528,18 @@ public class TCBController {
         // we can optionally disable hostname verification. 
         // if you don't want to further weaken the security, you don't have to include this.
         HostnameVerifier allowAllHosts = new NoopHostnameVerifier();
-        
+
         // create an SSL Socket Factory to use the SSLContext with the trust self signed certificate strategy
         // and allow all hosts verifier.
         SSLConnectionSocketFactory connectionFactory = new SSLConnectionSocketFactory(sslContext, allowAllHosts);
-        
+
         // finally create the HttpClient using HttpClient factory methods and assign the ssl socket factory
         return HttpClients
                 .custom()
                 .setSSLSocketFactory(connectionFactory)
                 .build();
     }
+
     MyResult GetCreateActiveUrl(String CustomerName, String MobileNumber) {
         String tibcoxml = PostCreateActiveUrl(CustomerName, MobileNumber);
 
@@ -558,7 +563,7 @@ public class TCBController {
     }
 
     @GetMapping(path = "/deletecardlink"
-        )
+    )
     @ResponseBody
     public String DeleteCardLink(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo) {
@@ -578,7 +583,7 @@ public class TCBController {
                 + "</TxId>" + "            <CreDtTm>" + CreDtTm.format(new Date()) + "</CreDtTm>"
                 + "            <RoutingRule>DeleteCardTokenRequest</RoutingRule>" + "            <Desc/>"
                 + "            <HeaderHashStr/>" + "            <Sgntr>" + "               <Sgntr1>"
-                + otherApi("DeleteCardTokenRequest",CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "</Sgntr1>" + "            </Sgntr>"
+                + otherApi("DeleteCardTokenRequest", CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "</Sgntr1>" + "            </Sgntr>"
                 + "         </ReqGnlInf>" + "         <Envt>" + "            <TrgtPty>" + "               <Nm>TCB</Nm>"
                 + "            </TrgtPty>" + "            <SrcPty>" + "               <Nm>MBC</Nm>"
                 + "            </SrcPty>" + "            <Rqstr>" + "               <Nm>Call from MBC system</Nm>"
@@ -593,7 +598,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -604,7 +609,8 @@ public class TCBController {
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
-            GlobalVariables.logger.info(result);post.releaseConnection();
+            GlobalVariables.logger.info(result);
+            post.releaseConnection();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -632,7 +638,7 @@ public class TCBController {
     }
 
     @GetMapping(path = "/verifyotp"
-        )
+    )
     @ResponseBody
     public String VerifyOTP(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo, @RequestParam("Otp") String Otp,
@@ -653,7 +659,7 @@ public class TCBController {
                 + uuid.toString() + "</Id>" + "		<TxId>" + TxId + "</TxId>" + "		<CreDtTm>"
                 + CreDtTm.format(new Date()) + "</CreDtTm>" + "		<RoutingRule>" + RoutingRule
                 + "</RoutingRule>" + "		<Desc/>" + "		<HeaderHashStr/>" + "		<Sgntr>"
-                + "			<Sgntr1>" + otherApi(RoutingRule,CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "</ Sgntr1>"
+                + "			<Sgntr1>" + otherApi(RoutingRule, CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "</ Sgntr1>"
                 + "		</Sgntr>" + "	</ReqGnlInf>" + "	<Envt>" + "		<TrgtPty>" + "			<Nm>CARD</Nm>"
                 + "		</TrgtPty>" + "		<SrcPty>" + "			<Nm>MBC</Nm>" + "		</SrcPty>" + "		<Rqstr>"
                 + "			<Nm>CARD</Nm>" + "		</Rqstr>" + "	</Envt>" + "	<ReqInf>" + "		<TokenInfo>"
@@ -667,7 +673,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -678,7 +684,8 @@ public class TCBController {
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
-            GlobalVariables.logger.info(result);post.releaseConnection();
+            GlobalVariables.logger.info(result);
+            post.releaseConnection();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -781,7 +788,7 @@ public class TCBController {
     }
 
     @GetMapping(path = "/cardtokentrxntopup"
-        )
+    )
     @ResponseBody
     public String CardTokenTrxnTopuP(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo, @RequestParam("TrxnAmount") String TrxnAmount,
@@ -805,7 +812,7 @@ public class TCBController {
                 + CreDtTm.format(new Date()) + "</CreDtTm>"
                 + "		<RoutingRule>CardTokenTrxnTopupRequest</RoutingRule>" + "		<Desc/>"
                 + "		<HeaderHashStr/>" + "		<Sgntr>" + "			<Sgntr1>"
-                + otherApi("CardTokenTrxnTopupRequest",CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "			</ Sgntr1>" + "		</Sgntr>"
+                + otherApi("CardTokenTrxnTopupRequest", CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "			</ Sgntr1>" + "		</Sgntr>"
                 + "	</ReqGnlInf>" + "	<Envt>" + "		<TrgtPty>" + "			<Nm>CARD</Nm>" + "		</TrgtPty>"
                 + "		<SrcPty>" + "			<Nm>MBC</Nm>" + "		</SrcPty>" + "		<Rqstr>"
                 + "			<Nm>Call from PARTNER_CODE system</Nm>" + "		</Rqstr>" + "	</Envt>" + "	<ReqInf>"
@@ -822,7 +829,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -833,7 +840,8 @@ public class TCBController {
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
-            GlobalVariables.logger.info(result);post.releaseConnection();
+            GlobalVariables.logger.info(result);
+            post.releaseConnection();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -935,7 +943,7 @@ public class TCBController {
     }
 
     @GetMapping(path = "/cardtokenTrxnsale"
-        )
+    )
     @ResponseBody
     public String CardTokenTrxnSale(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo, @RequestParam("TrxnAmount") String TrxnAmount,
@@ -959,7 +967,7 @@ public class TCBController {
                 + CreDtTm.format(new Date()) + "</CreDtTm>"
                 + "		<RoutingRule>CardTokenTrxnSaleRequest</RoutingRule>" + "		<Desc/>"
                 + "		<HeaderHashStr/>" + "		<Sgntr>" + "			<Sgntr1>"
-                + otherApi("CardTokenTrxnSaleRequest",CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "			</ Sgntr1>" + "		</Sgntr>"
+                + otherApi("CardTokenTrxnSaleRequest", CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "			</ Sgntr1>" + "		</Sgntr>"
                 + "	</ReqGnlInf>" + "	<Envt>" + "		<TrgtPty>" + "			<Nm>CARD</Nm>" + "		</TrgtPty>"
                 + "		<SrcPty>" + "			<Nm> PARTNER-ID-ISSUED-BY-TECHCOMBANK </Nm>" + "		</SrcPty>"
                 + "		<Rqstr>" + "			<Nm>Call from PARTNER_CODE system</Nm>" + "		</Rqstr>" + "	</Envt>"
@@ -977,7 +985,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -988,7 +996,8 @@ public class TCBController {
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
-            GlobalVariables.logger.info(result);post.releaseConnection();
+            GlobalVariables.logger.info(result);
+            post.releaseConnection();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -1032,7 +1041,7 @@ public class TCBController {
     }
 
     @GetMapping(path = "/cardtokentrxnwithdraw"
-        )
+    )
     @ResponseBody
     public String CardTokenTrxnWithdraw(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo, @RequestParam("TrxnAmount") String TrxnAmount,
@@ -1055,7 +1064,7 @@ public class TCBController {
                 + CreDtTm.format(new Date()) + "</CreDtTm>"
                 + "		<RoutingRule>CardTokenTrxnSaleRequest</RoutingRule>" + "		<Desc/>"
                 + "		<HeaderHashStr/>" + "		<Sgntr>" + "			<Sgntr1>"
-                + otherApi("CardTokenTrxnSaleRequest",CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "			</ Sgntr1>" + "		</Sgntr>"
+                + otherApi("CardTokenTrxnSaleRequest", CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "			</ Sgntr1>" + "		</Sgntr>"
                 + "	</ReqGnlInf>" + "	<Envt>" + "		<TrgtPty>" + "			<Nm>TCB</Nm>" + "		</TrgtPty>"
                 + "		<SrcPty>" + "			<Nm> PARTNER-ID-ISSUED-BY-TECHCOMBANK</Nm>" + "		</SrcPty>"
                 + "		<Rqstr>" + "			<Nm>Call from PARTNER_CODE system</Nm>" + "		</Rqstr>" + "	</Envt>"
@@ -1073,7 +1082,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -1084,7 +1093,8 @@ public class TCBController {
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
-            GlobalVariables.logger.info(result);post.releaseConnection();
+            GlobalVariables.logger.info(result);
+            post.releaseConnection();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -1128,7 +1138,7 @@ public class TCBController {
     }
 
     @GetMapping(path = "/cardtokentrxnrefund"
-        )
+    )
     @ResponseBody
     public String CardTokenTrxnRefund(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo, @RequestParam("TrxnAmount") String TrxnAmount,
@@ -1151,7 +1161,7 @@ public class TCBController {
                 + CreDtTm.format(new Date()) + "</CreDtTm>"
                 + "		<RoutingRule>CardTokenTrxnRefundRequest</RoutingRule>" + "		<Desc/>"
                 + "		<HeaderHashStr/>" + "		<Sgntr>" + "			<Sgntr1>"
-                + otherApi("CardTokenTrxnRefundRequest",CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "			</ Sgntr1>" + "		</Sgntr>"
+                + otherApi("CardTokenTrxnRefundRequest", CardInfo, TokenInfo, TrxnAmount, Otp, OtpTranId) + "			</ Sgntr1>" + "		</Sgntr>"
                 + "	</ReqGnlInf>" + "	<Envt>" + "		<TrgtPty>" + "			<Nm>CARD</Nm>" + "		</TrgtPty>"
                 + "		<SrcPty>" + "			<Nm> PARTNER-ID-ISSUED-BY-TECHCOMBANK</Nm>" + "		</SrcPty>"
                 + "		<Rqstr>" + "			<Nm>Call from PARTNER system</Nm>" + "		</Rqstr>" + "	</Envt>"
@@ -1169,7 +1179,7 @@ public class TCBController {
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 30000);
         HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
+        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/services/bank/collection/CardToken/v1");
 
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
@@ -1180,7 +1190,8 @@ public class TCBController {
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
-            GlobalVariables.logger.info(result);post.releaseConnection();
+            GlobalVariables.logger.info(result);
+            post.releaseConnection();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -1225,37 +1236,41 @@ public class TCBController {
     }
 
     /////////////////////////////
-    @GetMapping(path = "/fundtransfer",consumes = {MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_XML_VALUE}
-        )
+    @GetMapping(path = "/fundtransfer", consumes = {MediaType.APPLICATION_JSON_VALUE,
+        MediaType.APPLICATION_XML_VALUE}
+    )
     @ResponseBody
     public String FundTransfer(
-            @RequestParam("TxId") String TxId, 
-            @RequestParam("TxTp") String TxTp, 
-            @RequestParam("Description") String Description, 
-            @RequestParam("PaymentType") String payment_type, 
+            @RequestParam("TxId") String TxId,
+            @RequestParam("TxTp") String TxTp,
+            @RequestParam("Description") String Description,
+            @RequestParam("PaymentType") String payment_type,
             @RequestParam("TxAmt") String TxAmt,
             @RequestParam("customerID") String customerID,
-            @RequestParam("frAccId") String frAccId, 
+            @RequestParam("frAccId") String frAccId,
             @RequestParam("frAccTitl") String frAccTitl,
             @RequestParam("toAcct_Citad") String toAcct_Citad,
-            @RequestParam("toAccId") String toAccId, 
+            @RequestParam("toAccId") String toAccId,
             @RequestParam("toAccTitl") String toAccTitl,
             @RequestParam("toAccName") String toAccName
     ) {
         Gson gson = new Gson();
         UUID uuid = UUID.randomUUID();
-        
-        if(TxId.equals("")){            
-            TxId = ("MBC" + uuid.toString()).substring(0,19);
+
+        if (TxId.equals("")) {
+            TxId = ("MBC" + uuid.toString()).substring(0, 19);
+        } else if (TxId.equals("NO TxId")) {
+            TxId = "";
         }
-        if(TxTp.equals("")){
-            TxTp = "DOMESTIC"
+        if (TxTp.equals("")) {
+            TxTp = "DOMESTIC";
+        } else if (TxTp.equals("NO TxTP")) {
+            TxTp = "";
         }
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
 
         return PostFundTransfer(Description, uuid, TxId, payment_type, CreDtTm.format(new Date()), customerID, toAcct_Citad,
-                TxAmt, frAccId, frAccTitl, toAccId, toAccTitl, toAccName,TxTp);
+                TxAmt, frAccId, frAccTitl, toAccId, toAccTitl, toAccName, TxTp);
 
     }
 
@@ -1286,21 +1301,21 @@ public class TCBController {
         signature1 = JavaSignSHA256_V2
                 .signData_SHA256("FundTransfer" + id.toString() + toAccId + toAccTitl + CreDtTm + txAmt);
         signature2 = signature1;
-         
+
         if (citad.equals("")) {
             citad = "01310001"; // "Internal"
         }
         if (citad.equals("01310001")) {
             TxTp = "DOMESTIC"; // ATM
         }
-        
+
         String ReqInf = "<ReqInf xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\">" + "<TxTp>" + TxTp
                 + "</TxTp>" + "<TxDt>" + CreDtTm + "</TxDt>" + "<TxAmt>" + txAmt + "</TxAmt>" + "<Desc>" + Description
                 + "</Desc>" + "<FrAcct>" + "<AcctId>" + frAccId + "</AcctId>" + "<AcctTitl>" + frAccTitl + "</AcctTitl>"
                 + "</FrAcct>" + "<ToAcct>" + "<AcctId>" + toAccId + "</AcctId>" + "<AcctTitl>" + toAccTitl
                 + "</AcctTitl>" + "<FIData>" + "<CITAD>" + citad + "</CITAD>" + "</FIData>" + "<PtyData>" + "<Tp/>"
                 + "<Val>" + toAccTitl + "</Val>" + "<Desc/>" + "</PtyData>" + "</ToAcct>" + "</ReqInf>";
-        GlobalVariables.logger.info("ReqInf"+ReqInf);
+        GlobalVariables.logger.info("ReqInf" + ReqInf);
         ReqInfEncrypted = JavaSecutityEncrypt_V2.encrypt_AES256(ReqInf, "tcb_mahoa.cer");
         String postdata = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v1=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"
                 + "   <soapenv:Header/>" + "   <soapenv:Body>"
@@ -1328,15 +1343,16 @@ public class TCBController {
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
         post.setHeader("SOAPAction", "FundTransfer");
-        post.setHeader("Authorization","Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
+        post.setHeader("Authorization", "Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
         try {
             xmlEntity = new StringEntity(postdata);
-            GlobalVariables.logger.info("postdata----"+ReqInf);
+            GlobalVariables.logger.info("postdata----" + ReqInf);
 
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
-            GlobalVariables.logger.info(result);post.releaseConnection();
+            GlobalVariables.logger.info(result);
+            post.releaseConnection();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -1365,28 +1381,30 @@ public class TCBController {
     /////////////////////////////
 
     @GetMapping(path = "/accountinfo"
-        )
+    )
     @ResponseBody
     public String AccountInfo(@RequestParam("ClientTerminalSeqNum") String ClientTerminalSeqNum,
-            @RequestParam("Name") String Name, @RequestParam("Org") String CustOrg, 
+            @RequestParam("Name") String Name, @RequestParam("Org") String CustOrg,
             @RequestParam("SubjectRole") String SubjectRole, @RequestParam("AcctId") String AcctId) {
         Gson gson = new Gson();
-        return gson.toJson(GetAccountInfo("T24", ClientTerminalSeqNum,  Name, CustOrg, SubjectRole,  AcctId));
-     }
+        return gson.toJson(GetAccountInfo("T24", ClientTerminalSeqNum, Name, CustOrg, SubjectRole, AcctId));
+    }
 
     public String encriptAccountInfo(String SvcName, String ClientTerminalSeqNum,
-            String Name, String ORG, String SubjectRole, String AcctId) {         
+            String Name, String ORG, String SubjectRole, String AcctId) {
         UUID uuid = UUID.randomUUID();
         String TxId = "MBC" + uuid.toString();
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String strRequestDt = RequestDt.format(new Date());
         String _pathPublic = "tcb_mahoa.cer";
-        String content="<AcctSel><AcctKeys><AcctId>"+AcctId+"</AcctId></AcctKeys></AcctSel>";
-        String Bindata=JavaSignSHA256_V2.encrypt_AES256(content, _pathPublic);
-        String MsgGroupReference="ACCT";
-        if(SubjectRole.endsWith("CUSTOMER"))MsgGroupReference="CIF";
-        
+        String content = "<AcctSel><AcctKeys><AcctId>" + AcctId + "</AcctId></AcctKeys></AcctSel>";
+        String Bindata = JavaSignSHA256_V2.encrypt_AES256(content, _pathPublic);
+        String MsgGroupReference = "ACCT";
+        if (SubjectRole.endsWith("CUSTOMER")) {
+            MsgGroupReference = "CIF";
+        }
+
         String ReqInf = JavaSignSHA256_V2.signData_SHA256(
                 "AcctInq" + uuid.toString() + SvcName + Name + SubjectRole + MsgGroupReference + AcctId);
         return PostAccountInfo(SvcName, uuid.toString(), TxId, ClientTerminalSeqNum, Bindata, ReqInf, Name, ORG,
@@ -1424,23 +1442,24 @@ public class TCBController {
         post.setHeader("Content-Type", "text/xml;charset=UTF-8");
         post.setHeader("Connection", "Keep-Alive");
         post.setHeader("SOAPAction", "AccountInfo");
-        post.setHeader("Authorization","Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
+        post.setHeader("Authorization", "Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
         try {
             xmlEntity = new StringEntity(postdata);
             GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
-            GlobalVariables.logger.info(result);post.releaseConnection();
+            GlobalVariables.logger.info(result);
+            post.releaseConnection();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         return result;
     }
 
-    MyResult GetAccountInfo(String SvcName, String ClientTerminalSeqNum,  String Name,
+    MyResult GetAccountInfo(String SvcName, String ClientTerminalSeqNum, String Name,
             String ORG, String SubjectRole, String AcctId) {
-        String tibcoxml = encriptAccountInfo(SvcName, ClientTerminalSeqNum,  Name, ORG, SubjectRole,     AcctId);
+        String tibcoxml = encriptAccountInfo(SvcName, ClientTerminalSeqNum, Name, ORG, SubjectRole, AcctId);
         MyResult m = new MyResult();
         DocumentBuilder db;
         try {
@@ -1528,95 +1547,94 @@ public class TCBController {
     }
 
     /////////////////////////////
-    @GetMapping(path = "/inqlistbankinfo" )
+    @GetMapping(path = "/inqlistbankinfo")
     @ResponseBody
     public String InqListBankInfo() {
-        Gson gson = new Gson(); 
+        Gson gson = new Gson();
 
         return gson.toJson(GetInqListBankInfo());
     }
 
     public String PostInqListBankInfo() {
-    	String sign=encriptFundTransfer("","","","");
-        UUID uuid = UUID.randomUUID(); 
+        String sign = encriptFundTransfer("", "", "", "");
+        UUID uuid = UUID.randomUUID();
         String TxId = "MBC" + uuid.toString();
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
- 
-        String postdata = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v1=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"+
- "    <soapenv:Header/>"+
- "    <soapenv:Body>"+
- "        <v1:InqBnkInfReq xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"+
- "            <v1:ReqGnlInf>"+
- "                <v1:Id>"+uuid.toString()+"</v1:Id>"+
- "                <v1:TxId>"+TxId+"</v1:TxId>"+
- "                <v1:CreDtTm>"+CreDtTm.format(new Date())+"</v1:CreDtTm>"+
- "                <v1:Sgntr>"+sign+"</v1:Sgntr>"+
- "            </v1:ReqGnlInf>"+
- "            <v1:Envt>"+
- "                <v1:SrcPty>"+
- "                    <v1:Nm>MOBICAST</v1:Nm>"+
- "                </v1:SrcPty>"+
- "                <v1:TrgtPty>"+
- "                    <v1:Nm>H2H</v1:Nm>"+
- "                </v1:TrgtPty>"+
- "            </v1:Envt>"+
- "            <v1:ReqInf>"+
- "                <v1:BkId>ALL</v1:BkId>"+
- "            </v1:ReqInf>"+
- "        </v1:InqBnkInfReq>"+
- "    </soapenv:Body>"+
- "</soapenv:Envelope>";
- 
+
+        String postdata = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v1=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"
+                + "    <soapenv:Header/>"
+                + "    <soapenv:Body>"
+                + "        <v1:InqBnkInfReq xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"
+                + "            <v1:ReqGnlInf>"
+                + "                <v1:Id>" + uuid.toString() + "</v1:Id>"
+                + "                <v1:TxId>" + TxId + "</v1:TxId>"
+                + "                <v1:CreDtTm>" + CreDtTm.format(new Date()) + "</v1:CreDtTm>"
+                + "                <v1:Sgntr>" + sign + "</v1:Sgntr>"
+                + "            </v1:ReqGnlInf>"
+                + "            <v1:Envt>"
+                + "                <v1:SrcPty>"
+                + "                    <v1:Nm>MOBICAST</v1:Nm>"
+                + "                </v1:SrcPty>"
+                + "                <v1:TrgtPty>"
+                + "                    <v1:Nm>H2H</v1:Nm>"
+                + "                </v1:TrgtPty>"
+                + "            </v1:Envt>"
+                + "            <v1:ReqInf>"
+                + "                <v1:BkId>ALL</v1:BkId>"
+                + "            </v1:ReqInf>"
+                + "        </v1:InqBnkInfReq>"
+                + "    </soapenv:Body>"
+                + "</soapenv:Envelope>";
+
         StringEntity xmlEntity;
         HttpResponse response;
         String result = "";
-       
- 
+
         try {
-        	SSLContext sslContext = SSLContext.getInstance("SSL");
- 
-		// set up a TrustManager that trusts everything
-		sslContext.init(null, new TrustManager[] { new X509TrustManager() {
-		            public X509Certificate[] getAcceptedIssuers() {
-		                  
-		                    return null;
-		            }
+            SSLContext sslContext = SSLContext.getInstance("SSL");
 
-		            public void checkClientTrusted(X509Certificate[] certs,
-		                            String authType) { 
-		            }
+            // set up a TrustManager that trusts everything
+            sslContext.init(null, new TrustManager[]{new X509TrustManager() {
+                public X509Certificate[] getAcceptedIssuers() {
 
-		            public void checkServerTrusted(X509Certificate[] certs,
-		                            String authType) { 
-		            }
-		} }, new SecureRandom());
- 
-		@SuppressWarnings("deprecation")
-		SSLSocketFactory sf = new SSLSocketFactory(sslContext);
-		Scheme httpsScheme = new Scheme("https", 446, sf);
-		SchemeRegistry schemeRegistry = new SchemeRegistry();
-		schemeRegistry.register(httpsScheme);
- 
-		// apache HttpClient version >4.2 should use BasicClientConnectionManager
-		ClientConnectionManager cm = new SingleClientConnManager(schemeRegistry);
-		DefaultHttpClient httpClient = new DefaultHttpClient(cm);
-		HttpParams params = httpClient.getParams();
- 
-        HttpConnectionParams.setConnectionTimeout(params, 30000);
-        HttpConnectionParams.setSoTimeout(params, 30000);
-        HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/Partner2TCB/MOBICAST_payment_v3");
- 
-        post.setHeader("Content-Type", "text/xml;charset=UTF-8");
-        post.setHeader("Connection", "Keep-Alive"); 
-        post.setHeader("SOAPAction", "InqListBankInfo");
-        post.setHeader("Authorization","Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
+                    return null;
+                }
+
+                public void checkClientTrusted(X509Certificate[] certs,
+                        String authType) {
+                }
+
+                public void checkServerTrusted(X509Certificate[] certs,
+                        String authType) {
+                }
+            }}, new SecureRandom());
+
+            @SuppressWarnings("deprecation")
+            SSLSocketFactory sf = new SSLSocketFactory(sslContext);
+            Scheme httpsScheme = new Scheme("https", 446, sf);
+            SchemeRegistry schemeRegistry = new SchemeRegistry();
+            schemeRegistry.register(httpsScheme);
+
+            // apache HttpClient version >4.2 should use BasicClientConnectionManager
+            ClientConnectionManager cm = new SingleClientConnManager(schemeRegistry);
+            DefaultHttpClient httpClient = new DefaultHttpClient(cm);
+            HttpParams params = httpClient.getParams();
+
+            HttpConnectionParams.setConnectionTimeout(params, 30000);
+            HttpConnectionParams.setSoTimeout(params, 30000);
+            HttpPost post = new HttpPost("https://api-test.techcombank.com.vn:446/Partner2TCB/MOBICAST_payment_v3");
+
+            post.setHeader("Content-Type", "text/xml;charset=UTF-8");
+            post.setHeader("Connection", "Keep-Alive");
+            post.setHeader("SOAPAction", "InqListBankInfo");
+            post.setHeader("Authorization", "Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
             xmlEntity = new StringEntity(postdata);
             GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
-            GlobalVariables.logger.info("InqListBankInfo response"+response.getStatusLine().getStatusCode());
+            GlobalVariables.logger.info("InqListBankInfo response" + response.getStatusLine().getStatusCode());
             GlobalVariables.logger.info(result);
             post.releaseConnection();
         } catch (Exception ex) {
@@ -1626,41 +1644,41 @@ public class TCBController {
     }
 
     List<BankAccountInfo> GetInqListBankInfo() {
- 
+
         String tibcoxml = PostInqListBankInfo();
         List<BankAccountInfo> bankss = new ArrayList<TCBController.BankAccountInfo>();
-        
+
         DocumentBuilder db;
         try {
             db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(tibcoxml));
             Document doc = db.parse(is);
-            NodeList allbank=doc.getElementsByTagName("v1:BkInfRcrd");
+            NodeList allbank = doc.getElementsByTagName("v1:BkInfRcrd");
             for (int i = 0; i < allbank.getLength(); i++) {
-            	NodeList banks=allbank.item(i).getChildNodes();
-            	BankAccountInfo bank=new BankAccountInfo();
-            	for (int j = 0; j < banks.getLength(); j++) {
-            		
-            		switch ( banks.item(j).getNodeName()){
-            		case "v1:CITAD":
-            			bank.setCITAD(banks.item(j).getTextContent());
-            		case "v1:BkCd":
-            			bank.setBkCd(banks.item(j).getTextContent());
-            		case "v1:BkNm":
-            			bank.setBkNm(banks.item(j).getTextContent());
-            		case "v1:BrnchNm":
-            			bank.setBrnchNm(banks.item(j).getTextContent());
-            		case "v1:StatPrvc":
-            			bank.setStatPrvc(banks.item(j).getTextContent());
-            		case "v1:ActvSts":
-            			bank.setActvSts(banks.item(j).getTextContent());
-            		case "v1:IsCentralizedBank":
-            			bank.setIsCentralizedBank(banks.item(j).getTextContent());
-            		};
-				}
-            	bankss.add(bank);
-			} 
+                NodeList banks = allbank.item(i).getChildNodes();
+                BankAccountInfo bank = new BankAccountInfo();
+                for (int j = 0; j < banks.getLength(); j++) {
+
+                    switch (banks.item(j).getNodeName()) {
+                        case "v1:CITAD":
+                            bank.setCITAD(banks.item(j).getTextContent());
+                        case "v1:BkCd":
+                            bank.setBkCd(banks.item(j).getTextContent());
+                        case "v1:BkNm":
+                            bank.setBkNm(banks.item(j).getTextContent());
+                        case "v1:BrnchNm":
+                            bank.setBrnchNm(banks.item(j).getTextContent());
+                        case "v1:StatPrvc":
+                            bank.setStatPrvc(banks.item(j).getTextContent());
+                        case "v1:ActvSts":
+                            bank.setActvSts(banks.item(j).getTextContent());
+                        case "v1:IsCentralizedBank":
+                            bank.setIsCentralizedBank(banks.item(j).getTextContent());
+                    };
+                }
+                bankss.add(bank);
+            }
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -1711,8 +1729,8 @@ public class TCBController {
                 TxId + RoutingRule + TrgtPty + SrcPty + CustomerID + CustomerName + MobileNumber);
     }
 
-    public static String otherApi(String RoutingRule,String CardInfo, String TokenInfo, String TrxnAmount, String Otp, String OtpTranId) {
-         String TrgtPty = "TCB";
+    public static String otherApi(String RoutingRule, String CardInfo, String TokenInfo, String TrxnAmount, String Otp, String OtpTranId) {
+        String TrgtPty = "TCB";
         String SrcPty = "MBC";
         String TerminalId = "11021957";
         return JavaSignSHA256.encryptWithPublicKeyTCB(
