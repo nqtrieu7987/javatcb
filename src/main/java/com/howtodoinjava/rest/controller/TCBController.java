@@ -1230,6 +1230,8 @@ public class TCBController {
         )
     @ResponseBody
     public String FundTransfer(
+            @RequestParam("TxId") String TxId, 
+            @RequestParam("TxTp") String TxTp, 
             @RequestParam("Description") String Description, 
             @RequestParam("PaymentType") String payment_type, 
             @RequestParam("TxAmt") String TxAmt,
@@ -1243,11 +1245,17 @@ public class TCBController {
     ) {
         Gson gson = new Gson();
         UUID uuid = UUID.randomUUID();
-        String TxId = ("MBC" + uuid.toString()).substring(0,19);
+        
+        if(TxId.equals("")){            
+            TxId = ("MBC" + uuid.toString()).substring(0,19);
+        }
+        if(TxTp.equals("")){
+            TxTp = "DOMESTIC"
+        }
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
 
         return PostFundTransfer(Description, uuid, TxId, payment_type, CreDtTm.format(new Date()), customerID, toAcct_Citad,
-                TxAmt, frAccId, frAccTitl, toAccId, toAccTitl, toAccName);
+                TxAmt, frAccId, frAccTitl, toAccId, toAccTitl, toAccName,TxTp);
 
     }
 
@@ -1272,20 +1280,20 @@ public class TCBController {
 
     public String PostFundTransfer(String Description, UUID id, String TxId, String payment_type, String CreDtTm,
             String customerID, String citad, String txAmt, String frAccId, String frAccTitl, String toAccId,
-            String toAccTitl, String toAccName) {
+            String toAccTitl, String toAccName, String TxTp) {
         String ReqInfEncrypted, signature1, signature2;
         ReqInfEncrypted = signature1 = signature2 = "";
         signature1 = JavaSignSHA256_V2
                 .signData_SHA256("FundTransfer" + id.toString() + toAccId + toAccTitl + CreDtTm + txAmt);
         signature2 = signature1;
-
-        String TxTp = "DOMESTIC";
+         
         if (citad.equals("")) {
             citad = "01310001"; // "Internal"
         }
         if (citad.equals("01310001")) {
             TxTp = "DOMESTIC"; // ATM
         }
+        
         String ReqInf = "<ReqInf xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\">" + "<TxTp>" + TxTp
                 + "</TxTp>" + "<TxDt>" + CreDtTm + "</TxDt>" + "<TxAmt>" + txAmt + "</TxAmt>" + "<Desc>" + Description
                 + "</Desc>" + "<FrAcct>" + "<AcctId>" + frAccId + "</AcctId>" + "<AcctTitl>" + frAccTitl + "</AcctTitl>"
