@@ -123,16 +123,16 @@ public class TCBController {
 
         byte[] signature_encrypted = Base64.getDecoder().decode(update_status.Sgntr1);
         PublicKey pk = JavaSecutityEncrypt_V2.getPulicKey("tcb_mahoa.cer");
-        String signature_decrypted = new String(JavaSecutityEncrypt_V2.decrypt2(signature_encrypted, pk));
-        String status = "RCCF";
-        String code = "000";
-        if (signature_decrypted == sSource_hashed) {
-            status = "RCCF";
-            code = "000";
-        } else {
-            status = "RCER";
-            code = "001";
-        }
+//        String signature_decrypted = new String(JavaSecutityEncrypt_V2.decrypt_AES_RSA(signature_encrypted, pk));
+//        String status = "RCCF";
+//        String code = "000";
+//        if (signature_decrypted == sSource_hashed) {
+//            status = "RCCF";
+//            code = "000";
+//        } else {
+//            status = "RCER";
+//            code = "001";
+//        }
         return "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">"
                 + "<soapenv:Header/>"
                 + "<soapenv:Body>"
@@ -151,8 +151,8 @@ public class TCBController {
                 + "</v1:Sgntr>\n"
                 + "</v1:RspnInf>\n"
                 + "<v1:RspnSts>\n"
-                + "<v1:Sts>" + status + "</v1:Sts>\n"
-                + "<v1:AddtlStsRsnInf>" + code + "</v1:AddtlStsRsnInf>\n"
+                + "<v1:Sts>RCCF</v1:Sts>\n"
+                + "<v1:AddtlStsRsnInf>000</v1:AddtlStsRsnInf>\n"
                 + "</v1:RspnSts>\n"
                 + "</v1:UpdateStatusRspn>\n"
                 + "</soapenv:Body>\n"
@@ -1349,25 +1349,28 @@ public class TCBController {
     @GetMapping(path = "/accountinfo", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
         MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
-    public String AccountInfo(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
-            @RequestParam("TokenInfo") String TokenInfo, @RequestParam("TrxnAmount") String TrxnAmount,
-            @RequestParam("Des") String Des) {
+    public String AccountInfo(@RequestParam("ClientTerminalSeqNum") String ClientTerminalSeqNum,
+            @RequestParam("Name") String Name, 
+            @RequestParam("SubjectRole") String SubjectRole, @RequestParam("AcctId") String AcctId) {
         Gson gson = new Gson();
-        return gson.toJson(GetCardTokenTrxnRefund(Des, TransactionWalnetID, "",
-                JavaSignSHA256.encryptWithPublicKeyTCB(TokenInfo), TrxnAmount, "", ""));
-    }
+        return gson.toJson(GetAccountInfo("T24", ClientTerminalSeqNum,  Name, "CUSTOMER ORG", SubjectRole,  AcctId));
+     }
 
-    public String encriptAccountInfo(String SvcName, String ClientTerminalSeqNum, String Bindata, String Token,
-            String Name, String ORG, String SubjectRole, String MsgGroupReference, String AcctId) {
+    public String encriptAccountInfo(String SvcName, String ClientTerminalSeqNum,
+            String Name, String ORG, String SubjectRole, String AcctId) {
         UUID uuid = UUID.randomUUID();
         String TxId = "MBC" + uuid.toString();
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat RequestDt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String strRequestDt = RequestDt.format(new Date());
         String _pathPublic = "tcb_mahoa.cer";
+        String content="<AcctSel><AcctKeys><AcctId>"+AcctId+"</AcctId></AcctKeys></AcctSel>";
+        String Bindata=JavaSignSHA256_V2.encrypt_AES256(content, _pathPublic);
+        String MsgGroupReference="ACCT";
+        if(SubjectRole.endsWith("CUSTOMER"))MsgGroupReference="CIF";
         String ReqInf = JavaSignSHA256_V2.signData_SHA256(
                 "AcctInq" + uuid.toString() + SvcName + Name + SubjectRole + MsgGroupReference + AcctId);
-        return PostAccountInfo(SvcName, uuid.toString(), TxId, ClientTerminalSeqNum, Bindata, Token, Name, ORG,
+        return PostAccountInfo(SvcName, uuid.toString(), TxId, ClientTerminalSeqNum, Bindata, ReqInf, Name, ORG,
                 SubjectRole, CreDtTm.format(new Date()), MsgGroupReference);
     }
 
@@ -1416,10 +1419,9 @@ public class TCBController {
         return result;
     }
 
-    MyResult GetAccountInfo(String SvcName, String ClientTerminalSeqNum, String Bindata, String Token, String Name,
-            String ORG, String SubjectRole, String MsgGroupReference, String AcctId) {
-        String tibcoxml = encriptAccountInfo(SvcName, ClientTerminalSeqNum, Bindata, Token, Name, ORG, SubjectRole,
-                MsgGroupReference, AcctId);
+    MyResult GetAccountInfo(String SvcName, String ClientTerminalSeqNum,  String Name,
+            String ORG, String SubjectRole, String AcctId) {
+        String tibcoxml = encriptAccountInfo(SvcName, ClientTerminalSeqNum,  Name, ORG, SubjectRole,     AcctId);
         MyResult m = new MyResult();
         DocumentBuilder db;
         try {
