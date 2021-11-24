@@ -66,63 +66,57 @@ public class TCBController {
 
     String basic_token = "c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx";
     
-    @PostMapping(path = "/pushstatus", consumes = {MediaType.APPLICATION_JSON_VALUE,
-        MediaType.APPLICATION_XML_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE,
-        MediaType.APPLICATION_XML_VALUE})
+    @PostMapping(path = "/pushstatus")
     @ResponseBody
     public String pushstatus(@RequestBody String Xml) {
         GlobalVariables.logger.info("updatestatus------"+Xml);
  
-        // return "<soapenv:Envelope"+
-        // "xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">"+
-        // "<soapenv:Header"+
-        // "xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\"/>"+
-        // "<soapenv:Body"+
-        // "xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"+
-        // "<PushStatusRs"+
-        // "xmlns=\"http://app.linkcard.tcb.com/\">"+
-        // "<RspnInf>"+
-        // "<Id>stg11213128755dcb6ba88d0847</Id>"+
-        // "<TxId>1234567890</TxId>"+
-        // "<CreDtTm>2020-12-04T15:06:45.469+07:00</CreDtTm>"+
-        // "<Desc>Trans sale"+
-        // "response</Desc>"+
-        // "<Sgntr>NO"+
-        // "SIGNATURE</Sgntr>"+
-        // "</RspnInf>"+
-        // "<Envt>"+
-        // "<TrgtPty>"+
-        // "<Nm>CARD</Nm>"+
-        // "</TrgtPty>"+
-        // "<SrcPty>"+
-        // "<Nm>TCB</Nm>"+
-        // "</SrcPty>"+
-        // "<Rqstr>"+
-        // "<Nm>Response from TCB"+
-        // "system</Nm>"+
-        // "</Rqstr>"+
-        // "</Envt>"+
-        // "<RspnSts>"+
-        // "<Status>0</Status>"+
-        // "<ErrCd>APP-001</ErrCd>"+
-        // "<ErrMsg>Da ghi nhan</ErrMsg>"+
-        // "</RspnSts>"+
-        // "</PushStatusRs>"+
-        // "</soapenv:Body>";
-        Gson gson = new Gson();
-        return gson.toJson(GetPUSHSTATUS(Xml));
+         return "<soapenv:Envelope"+
+         "xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">"+
+         "<soapenv:Header"+
+         "xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\"/>"+
+         "<soapenv:Body"+
+         "xmlns=\"http://www.techcombank.com.vn/services/bank/collection/v1\">"+
+         "<PushStatusRs"+
+         "xmlns=\"http://app.linkcard.tcb.com/\">"+
+         "<RspnInf>"+
+         "<Id>stg11213128755dcb6ba88d0847</Id>"+
+         "<TxId>1234567890</TxId>"+
+         "<CreDtTm>2020-12-04T15:06:45.469+07:00</CreDtTm>"+
+         "<Desc>Trans sale"+
+         "response</Desc>"+
+         "<Sgntr>NO"+
+         "SIGNATURE</Sgntr>"+
+         "</RspnInf>"+
+         "<Envt>"+
+         "<TrgtPty>"+
+         "<Nm>CARD</Nm>"+
+         "</TrgtPty>"+
+         "<SrcPty>"+
+         "<Nm>TCB</Nm>"+
+         "</SrcPty>"+
+         "<Rqstr>"+
+         "<Nm>Response from TCB"+
+         "system</Nm>"+
+         "</Rqstr>"+
+         "</Envt>"+
+         "<RspnSts>"+
+         "<Status>0</Status>"+
+         "<ErrCd>APP-001</ErrCd>"+
+         "<ErrMsg>Da ghi nhan</ErrMsg>"+
+         "</RspnSts>"+
+         "</PushStatusRs>"+
+         "</soapenv:Body>"; 
     }
-
-    @PostMapping(path = "/updatestatus", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @PostMapping(path = "/updatestatus")
     @ResponseBody
     public String updatestatus(@RequestBody String xml) {
         GlobalVariables.logger.info("updatestatus------"+xml);
 
         UPDATESTATUS update_status = GetUPDATESTATUS(xml);
         String sSource = "UpdateStatus" + update_status.PartID + update_status.Channel + update_status.TxnStsRemark + update_status.TxnSts;
-       
-        if (JavaSignSHA256.verifySign_SHA256(sSource, 'tcb_mahoa.cer', update_status.Sgntr1)) {
+       String status="",code="";
+        if (JavaSignSHA256.verifySign_SHA256(sSource, "tcb_mahoa.cer", update_status.Sgntr1)) {
             status = "RCCF";
             code = "000";
         } else {
@@ -165,35 +159,35 @@ public class TCBController {
             InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(Xml));
             Document doc = db.parse(is);
-            if (doc.getElementsByTagName("Result") != null) {
-                m.setResult(doc.getElementsByTagName("Result").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:Result") != null) {
+                m.setResult(doc.getElementsByTagName("v1:Result").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("PartID") != null) {
-                m.setPartID(doc.getElementsByTagName("PartID").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:PartID") != null) {
+                m.setPartID(doc.getElementsByTagName("v1:PartID").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("Channel") != null) {
-                m.setChannel(doc.getElementsByTagName("Channel").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:Channel") != null) {
+                m.setChannel(doc.getElementsByTagName("v1:Channel").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("TxnStsRemark") != null) {
-                m.setTxnStsRemark(doc.getElementsByTagName("TxnStsRemark").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:TxnStsRemark") != null) {
+                m.setTxnStsRemark(doc.getElementsByTagName("v1:TxnStsRemark").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("TxnSts") != null) {
-                m.setTxnSts(doc.getElementsByTagName("TxnSts").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:TxnSts") != null) {
+                m.setTxnSts(doc.getElementsByTagName("v1:TxnSts").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("TxnDes") != null) {
-                m.setTxnDes(doc.getElementsByTagName("TxnDes").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:TxnDes") != null) {
+                m.setTxnDes(doc.getElementsByTagName("v1:TxnDes").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("TxnDate") != null) {
-                m.setTxnDate(doc.getElementsByTagName("TxnDate").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:TxnDate") != null) {
+                m.setTxnDate(doc.getElementsByTagName("v1:TxnDate").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("TxnBnkID") != null) {
-                m.setTxnBnkID(doc.getElementsByTagName("TxnBnkID").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:TxnBnkID") != null) {
+                m.setTxnBnkID(doc.getElementsByTagName("v1:TxnBnkID").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("ChannelTxnId") != null) {
-                m.setChannelTxnId(doc.getElementsByTagName("ChannelTxnId").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:ChannelTxnId") != null) {
+                m.setChannelTxnId(doc.getElementsByTagName("v1:ChannelTxnId").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("Sgntr1") != null) {
-                m.setChannelTxnId(doc.getElementsByTagName("Sgntr1").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:Sgntr1") != null) {
+                m.setChannelTxnId(doc.getElementsByTagName("v1:Sgntr1").item(0).getTextContent());
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -306,29 +300,29 @@ public class TCBController {
             InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(Xml));
             Document doc = db.parse(is);
-            if (doc.getElementsByTagName("TxTp") != null) {
+            if (doc.getElementsByTagName("v1:TxTp") != null) {
                 m.setTxTp(doc.getElementsByTagName("TxTp").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("TxId") != null) {
-                m.setTxId(doc.getElementsByTagName("TxId").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:TxId") != null) {
+                m.setTxId(doc.getElementsByTagName("v1:TxId").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("CusID") != null) {
-                m.setCusID(doc.getElementsByTagName("CusID").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:CusID") != null) {
+                m.setCusID(doc.getElementsByTagName("v1:CusID").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("CusPhone") != null) {
-                m.setCusPhone(doc.getElementsByTagName("CusPhone").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:CusPhone") != null) {
+                m.setCusPhone(doc.getElementsByTagName("v1:CusPhone").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("Status") != null) {
-                m.setStatus(doc.getElementsByTagName("Status").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:Status") != null) {
+                m.setStatus(doc.getElementsByTagName("v1:Status").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("Reason") != null) {
-                m.setReason(doc.getElementsByTagName("Reason").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:Reason") != null) {
+                m.setReason(doc.getElementsByTagName("v1:Reason").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("RefNumber") != null) {
-                m.setRefNumber(doc.getElementsByTagName("RefNumber").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:RefNumber") != null) {
+                m.setRefNumber(doc.getElementsByTagName("v1:RefNumber").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("TokenInfo") != null) {
-                m.setTokenInfo(doc.getElementsByTagName("TokenInfo").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:TokenInfo") != null) {
+                m.setTokenInfo(doc.getElementsByTagName("v1:TokenInfo").item(0).getTextContent());
             }
 
         } catch (Exception e) {
@@ -414,8 +408,7 @@ public class TCBController {
         }
     }
     
-    @GetMapping(path = "/createactiveurl", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/createactiveurl")
     @ResponseBody
     public String CreateActiveUrlRq(@RequestParam("CustomerName") String CustomerName,
             @RequestParam("MobileNumber") String MobileNumber) {
@@ -529,9 +522,9 @@ public class TCBController {
             InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(tibcoxml));
             Document doc = db.parse(is);
-            Node respon = doc.getElementsByTagName("Status").item(0);
-            if (doc.getElementsByTagName("ActiveUrlLink") != null) {
-                m.setValue(doc.getElementsByTagName("ActiveUrlLink").item(0).getTextContent());
+            Node respon = doc.getElementsByTagName("v1:Status").item(0);
+            if (doc.getElementsByTagName("v1:ActiveUrlLink") != null) {
+                m.setValue(doc.getElementsByTagName("v1:ActiveUrlLink").item(0).getTextContent());
             }
             m.setCode(respon.getTextContent());
         } catch (Exception e) {
@@ -541,8 +534,8 @@ public class TCBController {
         return m;
     }
 
-    @GetMapping(path = "/deletecardlink", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/deletecardlink"
+        )
     @ResponseBody
     public String DeleteCardLink(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo) {
@@ -584,7 +577,7 @@ public class TCBController {
         post.setHeader("SOAPAction", "DeleteCardToken");
         try {
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
@@ -605,7 +598,7 @@ public class TCBController {
             InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(tibcoxml));
             Document doc = db.parse(is);
-            Node respon = doc.getElementsByTagName("Status").item(0);
+            Node respon = doc.getElementsByTagName("v1:Status").item(0);
             m.setValue(respon.getTextContent());
             m.setCode(respon.getTextContent());
         } catch (Exception e) {
@@ -615,8 +608,8 @@ public class TCBController {
         return m;
     }
 
-    @GetMapping(path = "/verifyotp", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/verifyotp"
+        )
     @ResponseBody
     public String VerifyOTP(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo, @RequestParam("Otp") String Otp,
@@ -658,7 +651,7 @@ public class TCBController {
         post.setHeader("SOAPAction", "VerifyOTP");
         try {
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
@@ -680,23 +673,23 @@ public class TCBController {
             InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(tibcoxml));
             Document doc = db.parse(is);
-            if (doc.getElementsByTagName("Status") != null) {
-                m.setStatus(doc.getElementsByTagName("Status").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:Status") != null) {
+                m.setStatus(doc.getElementsByTagName("v1:Status").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("ErrCd") != null) {
-                m.setErrCd(doc.getElementsByTagName("ErrCd").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:ErrCd") != null) {
+                m.setErrCd(doc.getElementsByTagName("v1:ErrCd").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("ErrMsg") != null) {
-                m.setErrMsg(doc.getElementsByTagName("ErrMsg").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:ErrMsg") != null) {
+                m.setErrMsg(doc.getElementsByTagName("v1:ErrMsg").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("OtpTranId") != null) {
-                m.setOtpTranId(doc.getElementsByTagName("OtpTranId").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:OtpTranId") != null) {
+                m.setOtpTranId(doc.getElementsByTagName("v1:OtpTranId").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("RefTranId") != null) {
-                m.setRefTranId(doc.getElementsByTagName("RefTranId").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:RefTranId") != null) {
+                m.setRefTranId(doc.getElementsByTagName("v1:RefTranId").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("TokenInfo") != null) {
-                m.setTokenInfo(doc.getElementsByTagName("TokenInfo").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:TokenInfo") != null) {
+                m.setTokenInfo(doc.getElementsByTagName("v1:TokenInfo").item(0).getTextContent());
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -764,8 +757,8 @@ public class TCBController {
 
     }
 
-    @GetMapping(path = "/cardtokentrxntopup", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/cardtokentrxntopup"
+        )
     @ResponseBody
     public String CardTokenTrxnTopuP(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo, @RequestParam("TrxnAmount") String TrxnAmount,
@@ -813,7 +806,7 @@ public class TCBController {
         post.setHeader("SOAPAction", "CardTokenTrxnTopup");
         try {
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
@@ -835,23 +828,23 @@ public class TCBController {
             InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(tibcoxml));
             Document doc = db.parse(is);
-            if (doc.getElementsByTagName("Status") != null) {
-                m.setStatus(doc.getElementsByTagName("Status").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:Status") != null) {
+                m.setStatus(doc.getElementsByTagName("v1:Status").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("ErrCd") != null) {
-                m.setErrCd(doc.getElementsByTagName("ErrCd").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:ErrCd") != null) {
+                m.setErrCd(doc.getElementsByTagName("v1:ErrCd").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("ErrMsg") != null) {
-                m.setErrMsg(doc.getElementsByTagName("ErrMsg").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:ErrMsg") != null) {
+                m.setErrMsg(doc.getElementsByTagName("v1:ErrMsg").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("OtpTranId") != null) {
-                m.setOtpTranId(doc.getElementsByTagName("OtpTranId").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:OtpTranId") != null) {
+                m.setOtpTranId(doc.getElementsByTagName("v1:OtpTranId").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("RefTranId") != null) {
-                m.setRefTranId(doc.getElementsByTagName("RefTranId").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:RefTranId") != null) {
+                m.setRefTranId(doc.getElementsByTagName("v1:RefTranId").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("TokenInfo") != null) {
-                m.setTokenInfo(doc.getElementsByTagName("TokenInfo").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:TokenInfo") != null) {
+                m.setTokenInfo(doc.getElementsByTagName("v1:TokenInfo").item(0).getTextContent());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -918,8 +911,8 @@ public class TCBController {
 
     }
 
-    @GetMapping(path = "/cardtokenTrxnsale", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/cardtokenTrxnsale"
+        )
     @ResponseBody
     public String CardTokenTrxnSale(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo, @RequestParam("TrxnAmount") String TrxnAmount,
@@ -968,7 +961,7 @@ public class TCBController {
         post.setHeader("SOAPAction", "CardTokenTrxnSale");
         try {
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
@@ -990,23 +983,23 @@ public class TCBController {
             InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(tibcoxml));
             Document doc = db.parse(is);
-            if (doc.getElementsByTagName("Status") != null) {
-                m.setStatus(doc.getElementsByTagName("Status").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:Status") != null) {
+                m.setStatus(doc.getElementsByTagName("v1:Status").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("ErrCd") != null) {
-                m.setErrCd(doc.getElementsByTagName("ErrCd").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:ErrCd") != null) {
+                m.setErrCd(doc.getElementsByTagName("v1:ErrCd").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("ErrMsg") != null) {
-                m.setErrMsg(doc.getElementsByTagName("ErrMsg").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:ErrMsg") != null) {
+                m.setErrMsg(doc.getElementsByTagName("v1:ErrMsg").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("OtpTranId") != null) {
-                m.setOtpTranId(doc.getElementsByTagName("OtpTranId").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:OtpTranId") != null) {
+                m.setOtpTranId(doc.getElementsByTagName("v1:OtpTranId").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("RefTranId") != null) {
-                m.setRefTranId(doc.getElementsByTagName("RefTranId").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:RefTranId") != null) {
+                m.setRefTranId(doc.getElementsByTagName("v1:RefTranId").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("TokenInfo") != null) {
-                m.setTokenInfo(doc.getElementsByTagName("TokenInfo").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:TokenInfo") != null) {
+                m.setTokenInfo(doc.getElementsByTagName("v1:TokenInfo").item(0).getTextContent());
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -1015,8 +1008,8 @@ public class TCBController {
         return m;
     }
 
-    @GetMapping(path = "/cardtokentrxnwithdraw", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/cardtokentrxnwithdraw"
+        )
     @ResponseBody
     public String CardTokenTrxnWithdraw(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo, @RequestParam("TrxnAmount") String TrxnAmount,
@@ -1064,7 +1057,7 @@ public class TCBController {
         post.setHeader("SOAPAction", "CardTokenTrxnWithdraw");
         try {
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
@@ -1086,23 +1079,23 @@ public class TCBController {
             InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(tibcoxml));
             Document doc = db.parse(is);
-            if (doc.getElementsByTagName("Status") != null) {
-                m.setStatus(doc.getElementsByTagName("Status").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:Status") != null) {
+                m.setStatus(doc.getElementsByTagName("v1:Status").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("ErrCd") != null) {
-                m.setErrCd(doc.getElementsByTagName("ErrCd").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:ErrCd") != null) {
+                m.setErrCd(doc.getElementsByTagName("v1:ErrCd").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("ErrMsg") != null) {
-                m.setErrMsg(doc.getElementsByTagName("ErrMsg").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:ErrMsg") != null) {
+                m.setErrMsg(doc.getElementsByTagName("v1:ErrMsg").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("OtpTranId") != null) {
-                m.setOtpTranId(doc.getElementsByTagName("OtpTranId").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:OtpTranId") != null) {
+                m.setOtpTranId(doc.getElementsByTagName("v1:OtpTranId").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("RefTranId") != null) {
-                m.setRefTranId(doc.getElementsByTagName("RefTranId").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:RefTranId") != null) {
+                m.setRefTranId(doc.getElementsByTagName("v1:RefTranId").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("TokenInfo") != null) {
-                m.setTokenInfo(doc.getElementsByTagName("TokenInfo").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:TokenInfo") != null) {
+                m.setTokenInfo(doc.getElementsByTagName("v1:TokenInfo").item(0).getTextContent());
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -1111,8 +1104,8 @@ public class TCBController {
         return m;
     }
 
-    @GetMapping(path = "/cardtokentrxnrefund", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/cardtokentrxnrefund"
+        )
     @ResponseBody
     public String CardTokenTrxnRefund(@RequestParam("TransactionWalnetID") String TransactionWalnetID,
             @RequestParam("TokenInfo") String TokenInfo, @RequestParam("TrxnAmount") String TrxnAmount,
@@ -1160,7 +1153,7 @@ public class TCBController {
         post.setHeader("SOAPAction", "CardTokenTrxnRefund");
         try {
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
@@ -1182,23 +1175,23 @@ public class TCBController {
             InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(tibcoxml));
             Document doc = db.parse(is);
-            if (doc.getElementsByTagName("Status") != null) {
-                m.setStatus(doc.getElementsByTagName("Status").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:Status") != null) {
+                m.setStatus(doc.getElementsByTagName("v1:Status").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("ErrCd") != null) {
-                m.setErrCd(doc.getElementsByTagName("ErrCd").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:ErrCd") != null) {
+                m.setErrCd(doc.getElementsByTagName("v1:ErrCd").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("ErrMsg") != null) {
-                m.setErrMsg(doc.getElementsByTagName("ErrMsg").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:ErrMsg") != null) {
+                m.setErrMsg(doc.getElementsByTagName("v1:ErrMsg").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("OtpTranId") != null) {
-                m.setOtpTranId(doc.getElementsByTagName("OtpTranId").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:OtpTranId") != null) {
+                m.setOtpTranId(doc.getElementsByTagName("v1:OtpTranId").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("RefTranId") != null) {
-                m.setRefTranId(doc.getElementsByTagName("RefTranId").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:RefTranId") != null) {
+                m.setRefTranId(doc.getElementsByTagName("v1:RefTranId").item(0).getTextContent());
             }
-            if (doc.getElementsByTagName("TokenInfo") != null) {
-                m.setTokenInfo(doc.getElementsByTagName("TokenInfo").item(0).getTextContent());
+            if (doc.getElementsByTagName("v1:TokenInfo") != null) {
+                m.setTokenInfo(doc.getElementsByTagName("v1:TokenInfo").item(0).getTextContent());
             }
 
         } catch (Exception e) {
@@ -1209,8 +1202,8 @@ public class TCBController {
     }
 
     /////////////////////////////
-    @GetMapping(path = "/fundtransfer", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/fundtransfer"
+        )
     @ResponseBody
     public String FundTransfer(
             @RequestParam("Description") String Description, 
@@ -1306,7 +1299,8 @@ public class TCBController {
         post.setHeader("Authorization","Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
         try {
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info("postdata----"+ReqInf);
+
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
@@ -1326,8 +1320,8 @@ public class TCBController {
             InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(tibcoxml));
             Document doc = db.parse(is);
-            Node respon = doc.getElementsByTagName("Status").item(0);
-            Node RefTranId = doc.getElementsByTagName("RefTranId").item(0);
+            Node respon = doc.getElementsByTagName("v1:Status").item(0);
+            Node RefTranId = doc.getElementsByTagName("v1:RefTranId").item(0);
             m.setValue(RefTranId.getTextContent());
             m.setCode(respon.getTextContent());
         } catch (Exception e) {
@@ -1338,8 +1332,8 @@ public class TCBController {
     }
     /////////////////////////////
 
-    @GetMapping(path = "/accountinfo", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/accountinfo"
+        )
     @ResponseBody
     public String AccountInfo(@RequestParam("ClientTerminalSeqNum") String ClientTerminalSeqNum,
             @RequestParam("Name") String Name, @RequestParam("Org") String CustOrg, 
@@ -1401,7 +1395,7 @@ public class TCBController {
         post.setHeader("Authorization","Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
         try {
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
@@ -1422,9 +1416,9 @@ public class TCBController {
             InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(tibcoxml));
             Document doc = db.parse(is);
-            Node ServerStatusCode = doc.getElementsByTagName("ServerStatusCode").item(0);
+            Node ServerStatusCode = doc.getElementsByTagName("v1:ServerStatusCode").item(0);
             m.setCode(ServerStatusCode.getTextContent());
-            Node StatusDesc = doc.getElementsByTagName("StatusDesc").item(0);
+            Node StatusDesc = doc.getElementsByTagName("v1:StatusDesc").item(0);
             m.setValue(StatusDesc.getTextContent());
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -1502,8 +1496,7 @@ public class TCBController {
     }
 
     /////////////////////////////
-    @GetMapping(path = "/inqlistbankinfo", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
-        MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/inqlistbankinfo" )
     @ResponseBody
     public String InqListBankInfo() {
         Gson gson = new Gson(); 
@@ -1554,18 +1547,16 @@ public class TCBController {
 		// set up a TrustManager that trusts everything
 		sslContext.init(null, new TrustManager[] { new X509TrustManager() {
 		            public X509Certificate[] getAcceptedIssuers() {
-		                    System.out.println("getAcceptedIssuers =============");
+		                  
 		                    return null;
 		            }
 
 		            public void checkClientTrusted(X509Certificate[] certs,
-		                            String authType) {
-		                    System.out.println("checkClientTrusted =============");
+		                            String authType) { 
 		            }
 
 		            public void checkServerTrusted(X509Certificate[] certs,
-		                            String authType) {
-		                    System.out.println("checkServerTrusted =============");
+		                            String authType) { 
 		            }
 		} }, new SecureRandom());
  
@@ -1589,7 +1580,7 @@ public class TCBController {
         post.setHeader("SOAPAction", "InqListBankInfo");
         post.setHeader("Authorization","Basic c3J2X2VzYl9tb2JpY2FzdDpNMGIxY0BzdCMyMDIx");
             xmlEntity = new StringEntity(postdata);
-            System.out.println(postdata);
+            GlobalVariables.logger.info(postdata);
             post.setEntity(xmlEntity);
             response = httpClient.execute(post);
             result = EntityUtils.toString(response.getEntity());
