@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <ns:XferRspn xmlns:ns="http://www.techcombank.com.vn/services/bank/collection/v1">
+         <ns:RspnInf>
+            <ns:Id>890f1c28-5ca6-47b8-9bb8-3fd97ab446c5</ns:Id>
+            <ns:TxId>MBC890f1c28-5ca6-47</ns:TxId>
+            <ns:CreDtTm>2021-11-24T09:29:02.084+07:00</ns:CreDtTm>
+            <ns:Desc>Chuyen khoan chi ho</ns:Desc>
+            <ns:Sgntr>NO SIGNATURE</ns:Sgntr>
+         </ns:RspnInf>
+         <ns:RspnSts>
+            <ns:Sts>RCCF</ns:Sts>
+            <ns:AddtlStsRsnInf>000|Giao dich thanh cong - Success</ns:AddtlStsRsnInf>
+         </ns:RspnSts>
+         <ns:TxInf>
+            <ns:RefId>8ae588127d47c811017d4fc6658000e0</ns:RefId>
+            <ns:FeeAmt>0</ns:FeeAmt>
+         </ns:TxInf>
+      </ns:XferRspn>
+   </soapenv:Body>
+</soapenv:Envelope>

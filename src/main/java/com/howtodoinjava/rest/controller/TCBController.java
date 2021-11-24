@@ -1218,18 +1218,14 @@ public class TCBController {
     @GetMapping(path = "/fundtransfer", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {
         MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
-    public String FundTransfer(@RequestParam("Description") String Description,
-            @RequestParam("FrAcct_AcctId") String frAcct_AcctId,
-            @RequestParam("FrAcct_AcctTitl") String frAcct_AcctTitl,
-            @RequestParam("ToAcct_AcctId") String toAcct_AcctId,
-            @RequestParam("ToAcct_AcctTitl") String toAcct_AcctTitl, 
-            @RequestParam("ToAcct_Citad") String toAcct_Citad,
-            @RequestParam("ToAcct_CustName") String toAcct_CustName, 
-            @RequestParam("TxAmt") String TxAmt,
+    public String FundTransfer(
+            @RequestParam("Description") String Description, 
             @RequestParam("PaymentType") String payment_type, 
+            @RequestParam("TxAmt") String TxAmt,
             @RequestParam("customerID") String customerID,
             @RequestParam("frAccId") String frAccId, 
             @RequestParam("frAccTitl") String frAccTitl,
+            @RequestParam("toAcct_Citad") String toAcct_Citad,
             @RequestParam("toAccId") String toAccId, 
             @RequestParam("toAccTitl") String toAccTitl,
             @RequestParam("toAccName") String toAccName
@@ -1352,14 +1348,14 @@ public class TCBController {
         MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
     public String AccountInfo(@RequestParam("ClientTerminalSeqNum") String ClientTerminalSeqNum,
-            @RequestParam("Name") String Name, 
+            @RequestParam("Name") String Name, @RequestParam("Org") String CustOrg, 
             @RequestParam("SubjectRole") String SubjectRole, @RequestParam("AcctId") String AcctId) {
         Gson gson = new Gson();
-        return gson.toJson(GetAccountInfo("T24", ClientTerminalSeqNum,  Name, "CUSTOMER ORG", SubjectRole,  AcctId));
+        return gson.toJson(GetAccountInfo("T24", ClientTerminalSeqNum,  Name, CustOrg, SubjectRole,  AcctId));
      }
 
     public String encriptAccountInfo(String SvcName, String ClientTerminalSeqNum,
-            String Name, String ORG, String SubjectRole, String AcctId) {
+            String Name, String ORG, String SubjectRole, String AcctId) {         
         UUID uuid = UUID.randomUUID();
         String TxId = "MBC" + uuid.toString();
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
@@ -1370,6 +1366,7 @@ public class TCBController {
         String Bindata=JavaSignSHA256_V2.encrypt_AES256(content, _pathPublic);
         String MsgGroupReference="ACCT";
         if(SubjectRole.endsWith("CUSTOMER"))MsgGroupReference="CIF";
+        
         String ReqInf = JavaSignSHA256_V2.signData_SHA256(
                 "AcctInq" + uuid.toString() + SvcName + Name + SubjectRole + MsgGroupReference + AcctId);
         return PostAccountInfo(SvcName, uuid.toString(), TxId, ClientTerminalSeqNum, Bindata, ReqInf, Name, ORG,
