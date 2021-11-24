@@ -108,6 +108,7 @@ public class TCBController {
          "</PushStatusRs>"+
          "</soapenv:Body>"; 
     }
+   
     @PostMapping(path = "/updatestatus")
     @ResponseBody
     public String updatestatus(@RequestBody String xml) {
@@ -141,15 +142,37 @@ public class TCBController {
                 + "</v1:Sgntr>"
                 + "</v1:RspnInf>"
                 + "<v1:RspnSts>"
-                + "<v1:Sts>RCCF</v1:Sts>"
-                + "<v1:AddtlStsRsnInf>000</v1:AddtlStsRsnInf>"
+                + "<v1:Sts>"+status+"</v1:Sts>"
+                + "<v1:AddtlStsRsnInf>"+code+"</v1:AddtlStsRsnInf>"
                 + "</v1:RspnSts>"
                 + "</v1:UpdateStatusRspn>"
                 + "</soapenv:Body>"
                 + "</soapenv:Envelope>";
+    
         return xml_resp;
     }
-
+    private static Document convertStringToXMLDocument(String xmlString) 
+    {
+        //Parser that produces DOM object trees from XML content
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+         
+        //API to obtain DOM Document instance
+        DocumentBuilder builder = null;
+        try
+        {
+            //Create DocumentBuilder with default configuration
+            builder = factory.newDocumentBuilder();
+             
+            //Parse the content to Document object
+            Document doc = builder.parse(new InputSource(new StringReader(xmlString)));
+            return doc;
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
     UPDATESTATUS GetUPDATESTATUS(String Xml) {
 
         UPDATESTATUS m = new UPDATESTATUS();
@@ -1202,7 +1225,8 @@ public class TCBController {
     }
 
     /////////////////////////////
-    @GetMapping(path = "/fundtransfer"
+    @GetMapping(path = "/fundtransfer",consumes = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE}
         )
     @ResponseBody
     public String FundTransfer(
@@ -1222,8 +1246,8 @@ public class TCBController {
         String TxId = ("MBC" + uuid.toString()).substring(0,19);
         DateFormat CreDtTm = new SimpleDateFormat("yyyy-MM-dd");
 
-        return gson.toJson(PostFundTransfer(Description, uuid, TxId, payment_type, CreDtTm.format(new Date()), customerID, toAcct_Citad,
-                TxAmt, frAccId, frAccTitl, toAccId, toAccTitl, toAccName));
+        return PostFundTransfer(Description, uuid, TxId, payment_type, CreDtTm.format(new Date()), customerID, toAcct_Citad,
+                TxAmt, frAccId, frAccTitl, toAccId, toAccTitl, toAccName);
 
     }
 
