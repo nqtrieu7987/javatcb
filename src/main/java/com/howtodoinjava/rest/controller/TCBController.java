@@ -121,21 +121,15 @@ public class TCBController {
 
         UPDATESTATUS update_status = GetUPDATESTATUS(xml);
         String sSource = "UpdateStatus" + update_status.PartID + update_status.Channel + update_status.TxnStsRemark + update_status.TxnSts;
-        String sSource_hashed = JavaSignSHA256_V2.signData_SHA256(sSource);
-
-        byte[] signature_encrypted = Base64.getDecoder().decode(update_status.Sgntr1);
-        PublicKey pk = JavaSecutityEncrypt_V2.getPulicKey("tcb_mahoa.cer");
-        String signature_decrypted = new String(JavaSecutityEncrypt_V2.decrypt_AES_RSA(signature_encrypted, pk));
-        String status = "RCCF";
-        String code = "000";
-        if (signature_decrypted == sSource_hashed) {
+       
+        if (JavaSignSHA256.verifySign_SHA256(sSource, 'tcb_mahoa.cer', update_status.Sgntr1)) {
             status = "RCCF";
             code = "000";
         } else {
             status = "RCER";
             code = "001";
         }
-        return "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">"
+        String xml_resp =  "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">"
                 + "<soapenv:Header/>"
                 + "<soapenv:Body>"
                 + "<v1:UpdateStatusRspn"
@@ -159,7 +153,7 @@ public class TCBController {
                 + "</v1:UpdateStatusRspn>"
                 + "</soapenv:Body>"
                 + "</soapenv:Envelope>";
-
+        return xml_resp;
     }
 
     UPDATESTATUS GetUPDATESTATUS(String Xml) {
