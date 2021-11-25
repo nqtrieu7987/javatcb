@@ -1,4 +1,5 @@
 package com.vnm.erp.cover;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -42,29 +43,28 @@ public class JavaSignSHA256 {
             String signStr = signData_SHA256(sSource);
             System.out.println(">>>>>>>>>> Sign: " + signStr);
 
-            
-           //Verify MBCpay
-            
+            // Verify MBCpay
+
             String signStr2 = "f4YRWK2LP3BXdCJ1edmXOiduMKraUFYTKR8zp+cCExN2WesUC8ra487UoP4n6qz8fqQ9TA5d35NMK8JboDKTv/7+w8lyvGsT+JXIZ+dusmhrNlL8o5oVrow8T7I/LMP7/QT12mj+uRwEcoou/EZRuUuFtC3YtNjcKLA8SNf/stU2qwT+lxc60oLhE9jhIRgwzkOb5EYpFRaCpTtytJVDVccGUAI9/6QFrhdwJW2zwbwWaCzy/LhR7IWfkCkjIb01zCI7Jv9gDLgUt/mQn9YeV441VO4dHOmt+jCcC/Q171QYo6OvRC0AAkgbTjA2xd4w48I1Dja9Zm7y0sibb/lAnDMCwgTCeXIOZ/LtEhU+dEY+bqATwMVF2OMK7gSYrL6lgU0MSl0ER5vefou1ZsjtBGwXQIJUE3pFeMaJU0FGpnmQwTKkizgbhitteL3DYUwar/4wZdct8JOyCyDClaBFSamlJacq0fCT/D3WTYudAqRx94UcJbQdeUD9YJFA75hteoXzuOMseH3K1MYVAQrcTipeFOvydGgPLTn2KBq7EwY5BI26ADSaYXsS0PFvP3BckPYQbh25LjUqImpoZd+8PKATXM9c7udgdqtEjL/vVZPEX5blK3Lbonzo292wuwAB63kzrA2zuUqTAopcw8Y1/UrzTAHyRFdGGiPO3WYz4pw=";
             boolean result2 = verifySign_SHA256(sSource, publicPath, signStr);
             System.out.println(">>>>>>>>>> verifySignMBCpay: " + result2);
-            
-            
-            //encode MBCpay
-            String encrpTest = encryptWithPublicKeyTCB("Test message");            
+
+            // encode MBCpay
+            String encrpTest = encryptWithPublicKeyTCB("Test message");
             System.out.println(">>>>>>>>>> encryptWithPublicKeyTCB: " + encrpTest);
-    
-          //decode MBCpay
-            String decrpTest = decryptFtWithTCB("o1IoCyCTAhQVIMW+187k1AGK4YKkz1shRRAYgmvmFwFZgh7Eh4wo2A7xHhcIXm0BzjTgVfRjF4tvvVoI+cHY+xu+MWPUTtnGK5qFaZKyWuQsytVjyr3ihLaStyvG49BLNrhUaEA5xAtCMMSm7Yk/SSRJSvL9kzT/DVXiN5s7Ni42/1Kf0iN1abZLXtOyA4wgg7s7PDV3xYjP3e5wcfMS3iEHmLfKf5oU46fTzGy0YyBG7RUhiBszx3rGMKCJ3+qHdS17IicAf7FIvGhrCagwXmo6fweqP1FeNLTLkXiDmXSsQ/C09S9SirT53opX1hG6FFIPkQpjslO4G16o8I9ixuJt9+XgsUGpHlH+naVdD4BJbhZR+27XCrND4bsg0Pi1Z2fFb6tH1wLfKY3zByLOu3pSiGSDeNVkDazAkFGzGJRQ8rV6RsF8+rMx1mH0PsciqMQ2NQxdWiGZ9FHDso51DAofhFaybd65pjTArZM/q8hJs7FhQRsUe/Eys2aMidhNxgQ4TYi+/37oCjlZ5RtoGVp0ExWVyv9Yymwh9A4+00XbRwBAySAk8/+4kmW7znggFpHQJ59rhRVzjjr83dYkS7ZgeIPTfaB0oCcrY2LHIrHbFbuMyNBUXP/h5fZ47rWB3A0eDPHG62w4202UmbrRbXu8WvsARdPK8/UqvL/QnGI4zUfMxNuZ4lFxeZyJLlMYACFi3VUjvHc06NUNSvZUQg==");            
-            System.out.println(">>>>>>>>>> decryptFtWithTCB: " + decrpTest);            
-            
+
+            // decode MBCpay
+            String decrpTest = decryptFtWithTCB(
+                    "o1IoCyCTAhQVIMW+187k1AGK4YKkz1shRRAYgmvmFwFZgh7Eh4wo2A7xHhcIXm0BzjTgVfRjF4tvvVoI+cHY+xu+MWPUTtnGK5qFaZKyWuQsytVjyr3ihLaStyvG49BLNrhUaEA5xAtCMMSm7Yk/SSRJSvL9kzT/DVXiN5s7Ni42/1Kf0iN1abZLXtOyA4wgg7s7PDV3xYjP3e5wcfMS3iEHmLfKf5oU46fTzGy0YyBG7RUhiBszx3rGMKCJ3+qHdS17IicAf7FIvGhrCagwXmo6fweqP1FeNLTLkXiDmXSsQ/C09S9SirT53opX1hG6FFIPkQpjslO4G16o8I9ixuJt9+XgsUGpHlH+naVdD4BJbhZR+27XCrND4bsg0Pi1Z2fFb6tH1wLfKY3zByLOu3pSiGSDeNVkDazAkFGzGJRQ8rV6RsF8+rMx1mH0PsciqMQ2NQxdWiGZ9FHDso51DAofhFaybd65pjTArZM/q8hJs7FhQRsUe/Eys2aMidhNxgQ4TYi+/37oCjlZ5RtoGVp0ExWVyv9Yymwh9A4+00XbRwBAySAk8/+4kmW7znggFpHQJ59rhRVzjjr83dYkS7ZgeIPTfaB0oCcrY2LHIrHbFbuMyNBUXP/h5fZ47rWB3A0eDPHG62w4202UmbrRbXu8WvsARdPK8/UqvL/QnGI4zUfMxNuZ4lFxeZyJLlMYACFi3VUjvHc06NUNSvZUQg==");
+            System.out.println(">>>>>>>>>> decryptFtWithTCB: " + decrpTest);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static String signData_SHA256(Object sSource) {
-    	GlobalVariables.logger.info("SIGN --"+sSource);
+        GlobalVariables.logger.info("SIGN --" + sSource);
         byte[] bSource = (byte[]) null;
         byte[] bSourceSha256 = (byte[]) null;
         byte[] bSign = (byte[]) null;
@@ -102,8 +102,8 @@ public class JavaSignSHA256 {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             bSourceSha256 = digest.digest(bSource);
             bSign = Base64.getDecoder().decode(sSign.toString());
-            
-            //System.out.println(">>>>>>>>>>signStr1: " + bSign.toString());
+
+            // System.out.println(">>>>>>>>>>signStr1: " + bSign.toString());
             Signature sha256_rsa = Signature.getInstance("SHA256withRSA");
             sha256_rsa.initVerify(publicKey);
             sha256_rsa.update(bSourceSha256);
@@ -113,6 +113,7 @@ public class JavaSignSHA256 {
 
         return bVerify;
     }
+
     public static boolean verifySign_SHA256_2(Object sSource, String _path, Object sSign) {
         byte[] bSign = (byte[]) null;
         byte[] bSource = (byte[]) null;
@@ -121,21 +122,17 @@ public class JavaSignSHA256 {
 
         try {
             PublicKey publicKey = getPulicKey(_path);
-            bSource = sSource.toString().getBytes("UTF-8");
+            bSource = sSource.toString().getBytes();
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             bSourceSha256 = digest.digest(bSource);
-            
             bSign = Base64.getDecoder().decode(sSign.toString());
-            byte[] decrypted_bSign = JavaSignSHA256.decrypt2(bSign, publicKey);
-            //System.out.println(">>>>>>>>>>signStr1: " + bSign.toString());
-            String s1 = new String(bSourceSha256);
-            String s2 = new String(decrypted_bSign);
-            
-            GlobalVariables.logger.info("S1:"+s1);
-            GlobalVariables.logger.info("S1:"+s2);
-            return (s1).equals(s2);
+
+            // System.out.println(">>>>>>>>>>signStr1: " + bSign.toString());
+            Signature sha256_rsa = Signature.getInstance("SHA256withRSA");
+            sha256_rsa.initVerify(publicKey);
+            sha256_rsa.update(bSourceSha256);
+            bVerify = sha256_rsa.verify(bSign);
         } catch (Exception var9) {
-            GlobalVariables.logger.info("S1:"+var9.getMessage());
         }
 
         return bVerify;
@@ -156,7 +153,8 @@ public class JavaSignSHA256 {
         return decrypt_AES256(content, keyStorePath, keyStorePass, keyStoreType, alias, keyPass, _pathPublic);
     }
 
-    public static String verifySHA256(String msgInput, String inputType, String sign, String publicPath, String algorithm) {
+    public static String verifySHA256(String msgInput, String inputType, String sign, String publicPath,
+            String algorithm) {
         try {
             PublicKey publicKey = getPulicKey(publicPath);
             if (msgInput == null) {
@@ -166,27 +164,27 @@ public class JavaSignSHA256 {
             } else {
                 String var6;
                 switch ((var6 = inputType.toUpperCase()).hashCode()) {
-                    case 87031:
-                        if (var6.equals("XML")) {
-                            if (verifyXML(msgInput, publicKey)) {
-                                return "true";
-                            }
-
-                            return "false";
+                case 87031:
+                    if (var6.equals("XML")) {
+                        if (verifyXML(msgInput, publicKey)) {
+                            return "true";
                         }
-                        break;
-                    case 2571565:
-                        if (var6.equals("TEXT")) {
-                            if (sign == null) {
-                                return "Error Signature value cannot null";
-                            }
 
-                            if (verifyMsg(msgInput, publicKey, sign, algorithm)) {
-                                return "true";
-                            }
-
-                            return "false";
+                        return "false";
+                    }
+                    break;
+                case 2571565:
+                    if (var6.equals("TEXT")) {
+                        if (sign == null) {
+                            return "Error Signature value cannot null";
                         }
+
+                        if (verifyMsg(msgInput, publicKey, sign, algorithm)) {
+                            return "true";
+                        }
+
+                        return "false";
+                    }
                 }
 
                 return "Error Input type doesn't support";
@@ -259,7 +257,8 @@ public class JavaSignSHA256 {
         }
     }
 
-    public static PrivateKey getPrivateKey(String keyStorePath, String keyStorePass, String keyStoreType, String alias, String keyPass) {
+    public static PrivateKey getPrivateKey(String keyStorePath, String keyStorePass, String keyStoreType, String alias,
+            String keyPass) {
         try {
             FileInputStream is = new FileInputStream(keyStorePath);
             KeyStore keystore = KeyStore.getInstance(keyStoreType);
@@ -442,7 +441,8 @@ public class JavaSignSHA256 {
     public static Node getNodeByPath(Document doc, String path, String[]... nameSpace) {
         Node node = null;
         try {
-            if (path == null || path.length() == 0) return null;
+            if (path == null || path.length() == 0)
+                return null;
             XPath xPath = XPathFactory.newInstance().newXPath();
             if (nameSpace != null && nameSpace.length > 0) {
                 NamespaceContext nsContext = new NamespaceContext() {
@@ -472,8 +472,7 @@ public class JavaSignSHA256 {
                 xPath.setNamespaceContext(nsContext);
 
             }
-            NodeList nodeList = (NodeList) xPath.compile(path).evaluate(
-                    doc, XPathConstants.NODESET);
+            NodeList nodeList = (NodeList) xPath.compile(path).evaluate(doc, XPathConstants.NODESET);
             if (nodeList != null && nodeList.getLength() > 0) {
                 node = nodeList.item(0);
             }
@@ -484,7 +483,8 @@ public class JavaSignSHA256 {
         return node;
     }
 
-    public static String decrypt_AES256(String _content, String keyStorePath, String keyStorePass, String keyStoreType, String alias, String keyPass, String _pathPublic) {
+    public static String decrypt_AES256(String _content, String keyStorePath, String keyStorePass, String keyStoreType,
+            String alias, String keyPass, String _pathPublic) {
         String _result = null;
 
         try {
@@ -548,6 +548,7 @@ public class JavaSignSHA256 {
             return null;
         }
     }
+
     public static byte[] decrypt2(byte[] enSecretKey, PublicKey privateKey) {
         try {
             Cipher rsaCipher = Cipher.getInstance("RSA");
@@ -594,26 +595,27 @@ class X509KeySelector extends KeySelector {
     public X509KeySelector() {
     }
 
-    public KeySelectorResult select(KeyInfo keyInfo, Purpose purpose, AlgorithmMethod method, XMLCryptoContext context) throws KeySelectorException {
+    public KeySelectorResult select(KeyInfo keyInfo, Purpose purpose, AlgorithmMethod method, XMLCryptoContext context)
+            throws KeySelectorException {
         Iterator ki = keyInfo.getContent().iterator();
 
-        while(true) {
+        while (true) {
             XMLStructure info;
             do {
                 if (!ki.hasNext()) {
                     throw new KeySelectorException("No key found!");
                 }
 
-                info = (XMLStructure)ki.next();
-            } while(!(info instanceof X509Data));
+                info = (XMLStructure) ki.next();
+            } while (!(info instanceof X509Data));
 
-            X509Data x509Data = (X509Data)info;
+            X509Data x509Data = (X509Data) info;
             Iterator xi = x509Data.getContent().iterator();
 
-            while(xi.hasNext()) {
+            while (xi.hasNext()) {
                 Object o = xi.next();
                 if (o instanceof X509Certificate) {
-                    final PublicKey key = ((X509Certificate)o).getPublicKey();
+                    final PublicKey key = ((X509Certificate) o).getPublicKey();
                     System.out.println(key.toString());
                     if (this.algEquals(method.getAlgorithm(), key.getAlgorithm())) {
                         return new KeySelectorResult() {
@@ -628,6 +630,8 @@ class X509KeySelector extends KeySelector {
     }
 
     boolean algEquals(String algURI, String algName) {
-        return algName.equalsIgnoreCase("DSA") && algURI.equalsIgnoreCase("http://www.w3.org/2000/09/xmldsig#dsa-sha1") || algName.equalsIgnoreCase("RSA") && algURI.equalsIgnoreCase("http://www.w3.org/2000/09/xmldsig#rsa-sha1");
+        return algName.equalsIgnoreCase("DSA") && algURI.equalsIgnoreCase("http://www.w3.org/2000/09/xmldsig#dsa-sha1")
+                || algName.equalsIgnoreCase("RSA")
+                        && algURI.equalsIgnoreCase("http://www.w3.org/2000/09/xmldsig#rsa-sha1");
     }
 }
